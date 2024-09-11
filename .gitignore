@@ -39,3 +39,4 @@ build/
 
 .idea/
 ucad/
+communication-service/node_modules/
