@@ -81,10 +81,27 @@ module.exports={
     },
     getCommentaireByDeclarationId:async(req, res)=>
     {
-        const id=req.params.id;
+        const {declaration_id}=req.params;
         try {
-            const commentaires=await Commentaire.find({declaration_id:id}).exec();
-            res.status(200).send(commentaires);
+            const commentaires=await Commentaire.find({declaration_id:declaration_id}).exec();
+           const commentairesList=await Promise.all(
+                commentaires.map(async (com)=>
+                {
+                    try { 
+                    const userResponse= await axios.get(ResClient.USER_API+'/'+com.utilisateur_id);
+                    const userData=userResponse.data;
+                    return {
+                        ...com._doc,
+                        utilisateur:userData,
+                    }
+                    } catch (error) {
+                        return com;
+                    }
+                }
+
+                )
+            );
+            res.status(200).send(commentairesList);
         } catch (error) {
             res.status(500).send({message:"Impossible de retourner les commentaires pour cette declaration"});
         }
