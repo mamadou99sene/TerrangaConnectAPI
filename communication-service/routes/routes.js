@@ -1,48 +1,285 @@
-const CommentaireController=require('../controllers/commentaire');
-const routes=express.Router();
+const express = require('express');
+const CommentaireController = require('../controllers/commentaire');
+const DiscussionController = require('../controllers/discussion');
+const MessageController = require('../controllers/message');
+const routes = express.Router();
 
+/// Commentaires
 
-///Commentaires
-// Info de la requete {contenu,utilisateur_id,declaration_id} = req.body 
+/**
+ * @swagger
+ * /api/commentaires:
+ *   post:
+ *     summary: Créer un nouveau commentaire
+ *     description: Enregistre un commentaire pour une déclaration.
+ *     requestBody:
+ *       description: Informations sur le commentaire à créer
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               contenu:
+ *                 type: string
+ *               utilisateur_id:
+ *                 type: string
+ *               declaration_id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Commentaire créé avec succès
+ */
 routes.post('/api/commentaires', CommentaireController.saveCommentaire);
-//Renvoi un commentaire sachant son id, Parametre id=req.params.id
+
+/**
+ * @swagger
+ * /api/commentaires/{id}:
+ *   get:
+ *     summary: Obtenir un commentaire par ID
+ *     description: Renvoie un commentaire selon son ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du commentaire
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Détails du commentaire
+ */
 routes.get('/api/commentaires/:id', CommentaireController.getCommentaireById);
-//Renvoi tous les commentaires
+
+/**
+ * @swagger
+ * /api/commentaires:
+ *   get:
+ *     summary: Récupérer tous les commentaires
+ *     description: Renvoie une liste de tous les commentaires.
+ *     responses:
+ *       200:
+ *         description: Liste des commentaires
+ */
 routes.get('/api/commentaires', CommentaireController.getAllCommentaire);
-//Renvoi une liste de commentaire par rapport a une declaration, Paramateres: declaration_id= req.params
+
+/**
+ * @swagger
+ * /api/declarations/{declaration_id}/commentaires:
+ *   get:
+ *     summary: Récupérer les commentaires d'une déclaration
+ *     description: Renvoie une liste de commentaires associés à une déclaration.
+ *     parameters:
+ *       - in: path
+ *         name: declaration_id
+ *         required: true
+ *         description: ID de la déclaration
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Liste des commentaires de la déclaration
+ */
 routes.get('/api/declarations/:declaration_id/commentaires', CommentaireController.getCommentaireByDeclarationId);
-//Suppression d'un commentaire sachant son identifiant. Parametre: req.params.id
+
+/**
+ * @swagger
+ * /api/commentaires/{id}:
+ *   delete:
+ *     summary: Supprimer un commentaire par ID
+ *     description: Supprime un commentaire selon son ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du commentaire
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Commentaire supprimé
+ */
 routes.delete('/api/commentaires/:id', CommentaireController.deleteCommentaire);
 
-///Discussions
-const DiscussionController=require('../controllers/discussion');
-//Retourne toutes les disucussions effectué au niveau de la plateforme pour toutes les declarations
-//Avec pour chaque discussion, l'utilisateur qui la initié
-routes.get('/api/discussions',DiscussionController.getAllDiscussions);
-//Retourne la discussion dont l'identifiant est donnée en parametre
-// avec l'utilisateur qui a initié la discussion. Parametre: { discussion_id } = req.params
+/// Discussions
+
+/**
+ * @swagger
+ * /api/discussions:
+ *   get:
+ *     summary: Récupérer toutes les discussions
+ *     description: Renvoie une liste de toutes les discussions de la plateforme.
+ *     responses:
+ *       200:
+ *         description: Liste des discussions
+ */
+routes.get('/api/discussions', DiscussionController.getAllDiscussions);
+
+/**
+ * @swagger
+ * /api/discussions/{discussion_id}:
+ *   get:
+ *     summary: Obtenir une discussion par ID
+ *     description: Renvoie les détails d'une discussion selon son ID.
+ *     parameters:
+ *       - in: path
+ *         name: discussion_id
+ *         required: true
+ *         description: ID de la discussion
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Détails de la discussion
+ */
 routes.get('/api/discussions/:discussion_id', DiscussionController.getDiscussionById);
-//Route pour initialiser une discussion sur une declaration posté, a appeler avant de poster 
-//un message dans la discussion. Parametre: { declaration_id, utilisateur_id}= req.body;
+
+/**
+ * @swagger
+ * /api/discussions:
+ *   post:
+ *     summary: Créer une nouvelle discussion
+ *     description: Initialise une discussion sur une déclaration postée.
+ *     requestBody:
+ *       description: Informations sur la discussion à créer
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               declaration_id:
+ *                 type: string
+ *               utilisateur_id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Discussion créée avec succès
+ */
 routes.post('/api/discussions', DiscussionController.saveDiscussion);
-//L'ensemble des discussion autour d'une declaration dont l'identifiant est donné
-//en parametre. Parametre: {declaration_id}=req.params
+
+/**
+ * @swagger
+ * /api/discussions/declarations/{declaration_id}/discussions:
+ *   get:
+ *     summary: Récupérer toutes les discussions d'une déclaration
+ *     description: Renvoie toutes les discussions associées à une déclaration.
+ *     parameters:
+ *       - in: path
+ *         name: declaration_id
+ *         required: true
+ *         description: ID de la déclaration
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Liste des discussions de la déclaration
+ */
 routes.get('/api/discussions/declarations/:declaration_id/discussions', DiscussionController.getAllDiscussionsByDeclarationId);
 
-///Messages
-const MessageController=require('../controllers/message');
-//Retourne un message dont l'id est donnée en parametre: Paramatre:req.params.id
+/// Messages
+
+/**
+ * @swagger
+ * /api/messages/{id}:
+ *   get:
+ *     summary: Obtenir un message par ID
+ *     description: Renvoie les détails d'un message selon son ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du message
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Détails du message
+ */
 routes.get('/api/messages/:id', MessageController.getMessageById);
-//Enregistre et retourne le message. Parametre: { contenu, expediteur, recepteur, discussion_id } = req.body
+
+/**
+ * @swagger
+ * /api/messages:
+ *   post:
+ *     summary: Envoyer un message
+ *     description: Enregistre un message dans une discussion.
+ *     requestBody:
+ *       description: Informations sur le message à envoyer
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               contenu:
+ *                 type: string
+ *               expediteur:
+ *                 type: string
+ *               recepteur:
+ *                 type: string
+ *               discussion_id:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Message enregistré avec succès
+ */
 routes.post('/api/messages', MessageController.saveMessage);
-//Renvoi la liste de tous les messages pour toutes les discussions
+
+/**
+ * @swagger
+ * /api/messages:
+ *   get:
+ *     summary: Récupérer tous les messages
+ *     description: Renvoie une liste de tous les messages pour toutes les discussions.
+ *     responses:
+ *       200:
+ *         description: Liste des messages
+ */
 routes.get('/api/messages', MessageController.getAllMessages);
-//Supprime le message dont l'id est donnée en parametre
+
+/**
+ * @swagger
+ * /api/messages/{id}:
+ *   delete:
+ *     summary: Supprimer un message par ID
+ *     description: Supprime un message selon son ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID du message
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Message supprimé
+ */
 routes.delete('/api/messages/:id', MessageController.deleteMessage);
-//Les messages d'une discussion relative a une declaration
-//Parametre a envoyés: {declaration_id, discussion_id}= req.params;
+
+/**
+ * @swagger
+ * /api/declarations/{declaration_id}/discussions/{discussion_id}/messages:
+ *   get:
+ *     summary: Récupérer les messages d'une discussion spécifique
+ *     description: Renvoie les messages d'une discussion relative à une déclaration.
+ *     parameters:
+ *       - in: path
+ *         name: declaration_id
+ *         required: true
+ *         description: ID de la déclaration
+ *         schema:
+ *           type: string
+ *       - in: path
+ *         name: discussion_id
+ *         required: true
+ *         description: ID de la discussion
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Liste des messages de la discussion
+ */
 routes.get('/api/declarations/:declaration_id/discussions/:discussion_id/messages', DiscussionController.getMessagesForDiscussionIdentifyByDeclarationId);
 
-
-
-module.exports=routes;
+module.exports = routes;

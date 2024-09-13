@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Service
 public class ImageServiceImpl implements ImageService {
-    private final Path rootPath= Paths.get("./ucad/sn/sociale_service/MesImages");
+    private final Path rootPath= Paths.get("C:\\Users\\FIS-TS\\IdeaProjects\\TerangaConnectAPI\\sociale_service\\src\\main\\resources\\static\\MesImages");
     public ImageServiceImpl() {
         try {
             Files.createDirectories(rootPath);
@@ -25,7 +25,7 @@ public class ImageServiceImpl implements ImageService {
             throw new RuntimeException("Failed to store empty file");
         }
 
-        String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
         Path destinationFile = rootPath.resolve(Paths.get(filename)).normalize().toAbsolutePath();
         try {
             Files.copy(file.getInputStream(), destinationFile);

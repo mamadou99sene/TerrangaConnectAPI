@@ -39,7 +39,7 @@ module.exports={
                     res.status(200).send(commentUser);
                 }
                 else {
-                    res.status(404).send({ message: "Utilisateur introuvable" });
+                    res.status(200).send(commentaire);
                 }
             }
             else

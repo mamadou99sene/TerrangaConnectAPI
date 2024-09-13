@@ -21,7 +21,7 @@ public class UtilisateurServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(UtilisateurServiceApplication.class, args);
     }
-@Bean
+    //@Bean
     CommandLineRunner commandLineRunner(UtilisateurService utilisateurService)
     {
         return args -> {

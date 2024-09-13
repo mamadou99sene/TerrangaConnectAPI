@@ -1,8 +1,11 @@
 package ucad.sn.utilisateur_service.controllers;
 
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ucad.sn.utilisateur_service.dto.UtilisateurRequest;
 import ucad.sn.utilisateur_service.entities.Utilisateur;
 import ucad.sn.utilisateur_service.services.UtilisateurService;
@@ -65,5 +68,18 @@ public class UtilisateurController {
     {
         Utilisateur createdUser = this.utilisateurService.createUtilisateur(utilisateur);
         return  ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
+    }
+    @PutMapping("/utilisateurs/profile")
+    ResponseEntity<Utilisateur> uploaProfil(@RequestParam("id") String id, @RequestParam("profile") MultipartFile file)
+    {
+        Utilisateur utilisateur = this.utilisateurService.uploadProfil(id, file);
+        return ResponseEntity.status(HttpStatus.CREATED).body(utilisateur);
+    }
+    @GetMapping("/utilisateurs/{id}/profile")
+    ResponseEntity<Resource> getProfil(@PathVariable String id)
+    {
+        Resource profileUtilisateur = this.utilisateurService.getProfileUtilisateur(id);
+        return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.IMAGE_JPEG).body(profileUtilisateur);
+
     }
 }

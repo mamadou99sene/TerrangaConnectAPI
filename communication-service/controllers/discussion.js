@@ -48,7 +48,7 @@ module.exports={
             }
             else
             {
-                res.status(404).send({ message: "Utilisateur introuvable" });
+                res.status(200).send(discussion);
             }
         } catch (error) {
             res.status(500).send({ message: "Erreur lors de la récupération de la discussion" });

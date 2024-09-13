@@ -26,6 +26,7 @@ public class Utilisateur {
     private String password;
     @Transient
     private static Utilisateur utilisateur;
+    private String profile;
 
     public String getId() {
         return id;
@@ -75,6 +76,21 @@ public class Utilisateur {
         this.roles = roles;
     }
 
+    public static Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public static void setUtilisateur(Utilisateur utilisateur) {
+        Utilisateur.utilisateur = utilisateur;
+    }
+
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profileImagePath) {
+        this.profile = profileImagePath;
+    }
 
     public static Utilisateur getInstanceUtilisateur()
     {

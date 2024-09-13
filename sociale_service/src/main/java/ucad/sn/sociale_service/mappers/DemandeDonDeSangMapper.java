@@ -47,7 +47,11 @@ public class DemandeDonDeSangMapper extends DeclarationMapper{
         response.setDatePublication(demandeDondeSang.getDatePublication());
         response.setDemandeurId(demandeDondeSang.getDemandeurId());
         response.setDemandeur(demandeDondeSang.getDemandeurs());
-        response.setImages(demandeDondeSang.getImages());
+        List<String> imagesPath=demandeDondeSang.getImages().
+                stream().
+                map(image->"http://localhost:8888/SOCIALE-SERVICE/mesImages/"+image).
+                collect(Collectors.toList());
+        response.setImages(imagesPath);
         response.setAdresse(demandeDondeSang.getAdresse());
         response.setClasse(demandeDondeSang.getClasse());
         response.setRhesus(demandeDondeSang.getRhesus());

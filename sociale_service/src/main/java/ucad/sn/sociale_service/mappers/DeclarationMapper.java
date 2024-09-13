@@ -5,6 +5,9 @@ import ucad.sn.sociale_service.dto.*;
 import ucad.sn.sociale_service.entities.Declaration;
 import ucad.sn.sociale_service.services.ImageService;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class DeclarationMapper {
     protected ImageService imageService;
@@ -23,7 +26,11 @@ public class DeclarationMapper {
        response.setDatePublication(declaration.getDatePublication());
        response.setDemandeurId(declaration.getDemandeurId());
        response.setDemandeur(declaration.getDemandeurs());
-       response.setImages(declaration.getImages());
+        List<String> images=declaration.getImages().
+                stream().
+                map(image->"http://localhost:8888/SOCIALE-SERVICE/mesImages/"+image).
+                collect(Collectors.toList());
+       response.setImages(images);
       return response;
     }
 }

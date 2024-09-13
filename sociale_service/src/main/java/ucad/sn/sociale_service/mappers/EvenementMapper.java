@@ -50,7 +50,7 @@ public class EvenementMapper extends  DeclarationMapper{
         response.setDemandeur(evenement.getDemandeurs());
         List<String> images = evenement.getImages().
                 stream().
-                map(image->"http://localhost:8081/ucad/sn/sociale_service/MesImages/"+image).
+                map(image->"http://localhost:8888/SOCIALE-SERVICE/mesImages/"+image).
                 collect(Collectors.toList());
         response.setImages(images);
         response.setLieu(evenement.getLieu());
