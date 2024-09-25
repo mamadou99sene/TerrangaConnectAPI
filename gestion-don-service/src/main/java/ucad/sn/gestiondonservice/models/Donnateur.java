@@ -8,4 +8,5 @@ public class Donnateur {
     private String email;
     private String telephone;
     private double score;
+    private String profile;
 }
