@@ -48,10 +48,10 @@ public class UrgenceSocialeMapper extends DeclarationMapper{
         response.setDatePublication(urgenceSociale.getDatePublication());
         response.setDemandeurId(urgenceSociale.getDemandeurId());
         response.setDemandeur(urgenceSociale.getDemandeurs());
-        List<String> imagesPath=urgenceSociale.getImages().stream().map(image->
-            "http://localhost:8888/SOCIALE-SERVICE/mesImages/"+image
-        ).collect(Collectors.toList());
-        response.setImages(imagesPath);
+        List<String> imagesUrl = urgenceSociale.getImages().stream()
+                .map(imageService::getImageUrl)
+                .collect(Collectors.toList());
+        response.setImages(imagesUrl);
         response.setLieu(urgenceSociale.getLieu());
         response.setType(urgenceSociale.getType());
         response.setMontantRequis(urgenceSociale.getMontantRequis());

@@ -10,4 +10,5 @@ public class Demandeur {
     private String email;
     private String telephone;
     private double score;
+    private String profile;
 }
