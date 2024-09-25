@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 require('dotenv').config();
-const mongoDB_URL=process.env.MONGO_DB_URL_LOCAL;
+const mongoDB_URL=process.env.MONGO_DB_CLOUD_URL;
 mongoose
     .set('strictQuery',true)
     .connect(mongoDB_URL)
