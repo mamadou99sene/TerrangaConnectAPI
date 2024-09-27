@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class DonMaterielMapper {
-    private ImageService imageService;
+public class DonMaterielMapper extends DonMapper{
+
 
     public DonMaterielMapper(ImageService imageService) {
-        this.imageService = imageService;
+        super(imageService);
     }
 
     public DonMateriel convertToEntitie(DonMaterielRequest request, List<MultipartFile> files)
@@ -47,7 +47,12 @@ public class DonMaterielMapper {
         response.setDonnateur(donMateriel.getDonnateur());
         response.setDonateurId(donMateriel.getDonateurId());
         response.setDeclarationId(donMateriel.getDeclarationId());
-        response.setImagesDon(donMateriel.getImagesDon());
+        List<String> imagesUrl=donMateriel.
+                getImagesDon().
+                stream().
+                map(this.imageService::getImageUrl).
+                collect(Collectors.toList());
+        donMateriel.setImagesDon(imagesUrl);
         return response;
     }
 }

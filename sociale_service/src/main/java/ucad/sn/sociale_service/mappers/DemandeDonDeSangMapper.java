@@ -49,7 +49,7 @@ public class DemandeDonDeSangMapper extends DeclarationMapper{
         response.setDemandeur(demandeDondeSang.getDemandeurs());
         List<String> imagesPath=demandeDondeSang.getImages().
                 stream().
-                map(image->"http://localhost:8888/SOCIALE-SERVICE/mesImages/"+image).
+                map(imageService::getImageUrl).
                 collect(Collectors.toList());
         response.setImages(imagesPath);
         response.setAdresse(demandeDondeSang.getAdresse());

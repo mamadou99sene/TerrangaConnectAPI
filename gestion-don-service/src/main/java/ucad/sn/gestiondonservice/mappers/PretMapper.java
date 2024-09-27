@@ -13,12 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class PretMapper {
-    private ImageService imageService;
-
+public class PretMapper extends DonMapper{
     public PretMapper(ImageService imageService) {
-        this.imageService = imageService;
+        super(imageService);
     }
+
     public Pret convertToEntitie(PretRequest request, List<MultipartFile> files)
     {
         Pret pret=new Pret();
@@ -47,7 +46,12 @@ public class PretMapper {
         response.setDonateurId(pret.getDonateurId());
         response.setDeclarationId(pret.getDeclarationId());
         response.setDuree(pret.getDuree());
-        response.setImages(pret.getImagesPret());
+        List<String> imagesUrl=pret.
+                getImagesPret().
+                stream().
+                map(this.imageService::getImageUrl).
+                collect(Collectors.toList());
+        pret.setImagesPret(imagesUrl);
         return response;
     }
 }

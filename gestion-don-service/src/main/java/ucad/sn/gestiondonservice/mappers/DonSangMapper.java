@@ -5,11 +5,16 @@ import ucad.sn.gestiondonservice.dto.DonSangRequest;
 import ucad.sn.gestiondonservice.dto.DonSangResponse;
 import ucad.sn.gestiondonservice.entities.DonSang;
 import ucad.sn.gestiondonservice.enums.TypeDon;
+import ucad.sn.gestiondonservice.services.ImageService;
 
 import java.time.LocalDateTime;
 
 @Component
-public class DonSangMapper {
+public class DonSangMapper extends DonMapper{
+    public DonSangMapper(ImageService imageService) {
+        super(imageService);
+    }
+
     public DonSang convertToEntitie(DonSangRequest request)
     {
         DonSang donSang=new DonSang();

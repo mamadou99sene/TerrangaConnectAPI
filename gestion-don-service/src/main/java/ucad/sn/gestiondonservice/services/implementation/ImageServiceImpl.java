@@ -1,5 +1,6 @@
 package ucad.sn.gestiondonservice.services.implementation;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ucad.sn.gestiondonservice.services.ImageService;
@@ -12,21 +13,27 @@ import java.util.UUID;
 
 @Service
 public class ImageServiceImpl implements ImageService {
-    private final Path rootPath= Paths.get("C:\\Users\\FIS-TS\\IdeaProjects\\TerangaConnectAPI\\gestion-don-service\\src\\main\\java\\ucad\\sn\\gestiondonservice\\MesImages");
-    public ImageServiceImpl() {
+    private final Path rootPath;
+    private final String imageUrlPrefix;
+
+    public ImageServiceImpl(@Value("${app.upload.dir}") String uploadDir,
+                            @Value("${app.image.url.prefix}") String imageUrlPrefix) {
+        this.rootPath = Paths.get(uploadDir).toAbsolutePath().normalize();
+        this.imageUrlPrefix = imageUrlPrefix;
         try {
-            Files.createDirectories(rootPath);
+            Files.createDirectories(this.rootPath);
         } catch (IOException e) {
-            throw new RuntimeException("Could not create directory for images");
+            throw new RuntimeException("Could not create directory for images", e);
         }
     }
+
+    @Override
     public String saveImage(MultipartFile file) {
         if (file.isEmpty()) {
             throw new RuntimeException("Failed to store empty file");
         }
-
-        String filename = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-        Path destinationFile = rootPath.resolve(Paths.get(filename)).normalize().toAbsolutePath();
+        String filename = UUID.randomUUID() + "_" + file.getOriginalFilename();
+        Path destinationFile = this.rootPath.resolve(filename).normalize();
         try {
             Files.copy(file.getInputStream(), destinationFile);
         } catch (IOException e) {
@@ -38,11 +45,15 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Boolean deleteImage(String filename) {
         try {
-            Path file=rootPath.resolve(filename);
-            Files.deleteIfExists(file);
-            return true;
+            Path file = this.rootPath.resolve(filename);
+            return Files.deleteIfExists(file);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to delete file", e);
         }
+    }
+
+    @Override
+    public String getImageUrl(String filename) {
+        return this.imageUrlPrefix + filename;
     }
 }

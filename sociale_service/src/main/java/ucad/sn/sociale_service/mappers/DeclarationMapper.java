@@ -28,7 +28,7 @@ public class DeclarationMapper {
        response.setDemandeur(declaration.getDemandeurs());
         List<String> images=declaration.getImages().
                 stream().
-                map(image->"http://localhost:8888/SOCIALE-SERVICE/mesImages/"+image).
+                map(imageService::getImageUrl).
                 collect(Collectors.toList());
        response.setImages(images);
       return response;

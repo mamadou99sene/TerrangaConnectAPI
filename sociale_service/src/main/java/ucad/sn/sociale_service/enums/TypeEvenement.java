@@ -6,4 +6,5 @@ public enum TypeEvenement {
     CONCERT,
     CONFERENCE,
     AUTRE,
+    GRADUATION
 }
