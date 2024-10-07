@@ -51,7 +51,7 @@ public class PretMapper extends DonMapper{
                 stream().
                 map(this.imageService::getImageUrl).
                 collect(Collectors.toList());
-        pret.setImagesPret(imagesUrl);
+        response.setImages(imagesUrl);
         return response;
     }
 }

@@ -52,7 +52,7 @@ public class DonMaterielMapper extends DonMapper{
                 stream().
                 map(this.imageService::getImageUrl).
                 collect(Collectors.toList());
-        donMateriel.setImagesDon(imagesUrl);
+        response.setImagesDon(imagesUrl);
         return response;
     }
 }
