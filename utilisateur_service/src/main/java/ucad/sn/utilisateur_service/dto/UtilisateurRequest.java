@@ -1,20 +1,23 @@
 package ucad.sn.utilisateur_service.dto;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import ucad.sn.utilisateur_service.enums.Role;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor @NoArgsConstructor @Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UtilisateurRequest {
-    private String email;
-    private String telephone;
-    private double score;
-    private String password;
-    private List<Role> roles=new ArrayList<>();
+     String email;
+     String telephone;
+     double score;
+     String password;
+     List<Role> roles=new ArrayList<>();
 
     public String getEmail() {
         return email;

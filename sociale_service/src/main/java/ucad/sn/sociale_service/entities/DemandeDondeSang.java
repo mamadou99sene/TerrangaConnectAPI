@@ -1,15 +1,17 @@
 package ucad.sn.sociale_service.entities;
 
 import jakarta.persistence.Entity;
-import lombok.Builder;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import ucad.sn.sociale_service.enums.ClasseSang;
 import ucad.sn.sociale_service.enums.Rhesus;
 @Entity @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class DemandeDondeSang extends Declaration{
-    private String adresse;
-    private ClasseSang classe;
-    private Rhesus rhesus;
+     String adresse;
+     ClasseSang classe;
+     Rhesus rhesus;
 
     public String getAdresse() {
         return adresse;

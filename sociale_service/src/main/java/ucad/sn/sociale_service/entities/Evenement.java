@@ -1,16 +1,19 @@
 package ucad.sn.sociale_service.entities;
 
 import jakarta.persistence.Entity;
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import ucad.sn.sociale_service.enums.TypeEvenement;
 
 import java.time.LocalDateTime;
 @Entity @NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Evenement extends Declaration{
-    private String lieu;
-    private TypeEvenement type;
-    private LocalDateTime dateDebut;
-    private LocalDateTime dateFin;
+     String lieu;
+     TypeEvenement type;
+     LocalDateTime dateDebut;
+     LocalDateTime dateFin;
 
     public String getLieu() {
         return lieu;

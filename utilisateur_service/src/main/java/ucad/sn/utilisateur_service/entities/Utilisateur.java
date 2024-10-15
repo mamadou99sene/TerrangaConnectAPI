@@ -3,6 +3,7 @@ package ucad.sn.utilisateur_service.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ucad.sn.utilisateur_service.enums.Role;
 
 import java.util.ArrayList;
@@ -11,22 +12,23 @@ import java.util.List;
 @Entity
 @Builder @AllArgsConstructor @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@FieldDefaults(level = AccessLevel.PROTECTED)
 public class Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String id;
-    private String email;
-    private String telephone;
-    private double score;
+     String id;
+     String email;
+     String telephone;
+     double score;
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
-    private List<Role> roles=new ArrayList<>();
+     List<Role> roles=new ArrayList<>();
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
+     String password;
     @Transient
-    private static Utilisateur utilisateur;
-    private String profile;
+     static Utilisateur utilisateur;
+     String profile;
 
     public String getId() {
         return id;
