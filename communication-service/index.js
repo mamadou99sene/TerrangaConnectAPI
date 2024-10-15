@@ -16,7 +16,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 mongoose.connection.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.listen(PORT,() => {
     console.log("Serveur démmaré au port "+PORT);
-   /* eureka.start(error => {
+    eureka.start(error => {
         console.log(error || 'communication service enregistré auprès d\'Eureka');
-    });*/
+    });
 });
