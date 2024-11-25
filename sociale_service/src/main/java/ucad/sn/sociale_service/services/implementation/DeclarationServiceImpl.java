@@ -105,6 +105,21 @@ public class DeclarationServiceImpl implements DeclarationService {
         }
     }
 
+    @Override
+    public UrgenceSocialeResponse enableUrgenceSociale(String idUrgence) {
+        return this.urgenceSocialeService.enableUrgenceSociale(idUrgence);
+    }
+
+    @Override
+    public EvenementResponse enableEvent(String idEvent) {
+        return this.evenementService.enableEvent(idEvent);
+    }
+
+    @Override
+    public DemandeDonDeSangResponse enableDemandeDon(String idDemande) {
+       return this.demandeDondeSangService.enableDemandeDon(idDemande);
+    }
+
 /*    @Override
     public List<DonResponse> getDonByDeclarationId(String idDeclaation) {
         Optional<Declaration> optbyId = this.declarationRepository.findById(idDeclaation);

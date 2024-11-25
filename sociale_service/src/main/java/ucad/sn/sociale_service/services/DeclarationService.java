@@ -17,5 +17,8 @@ public interface DeclarationService {
     public EvenementResponse saveEventDeclaration(EvenementRequest request, List<MultipartFile> files);
   public Boolean deleteDeclaration(String id);
     public DeclarationResponse updateDeclaration(DeclarationRequest request, String id);
+    public UrgenceSocialeResponse enableUrgenceSociale(String idUrgence);
+    public EvenementResponse enableEvent(String idEvent);
+    public DemandeDonDeSangResponse enableDemandeDon(String idDemande);
     /*public List<DonResponse> getDonByDeclarationId(String idDeclaation);*/
 }

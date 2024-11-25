@@ -10,4 +10,5 @@ public interface UrgenceSocialeService {
     public List<UrgenceSocialeResponse> getAllUrgenceSociale();
     public UrgenceSocialeResponse getUrgenceSocialeById(String id);
     public UrgenceSocialeResponse saveUrgenceSociale(UrgenceSocialeRequest request, List<MultipartFile> files);
+    public UrgenceSocialeResponse enableUrgenceSociale(String id);
 }

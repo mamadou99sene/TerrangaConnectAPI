@@ -12,4 +12,5 @@ public interface EvenementService {
     public EvenementResponse saveEvenement(EvenementRequest request, List<MultipartFile> files);
     public EvenementResponse updateEvenement(EvenementRequest request, String id);
     public Boolean deleteEvenement(String id);
+    public EvenementResponse enableEvent(String idEvent);
 }

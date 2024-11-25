@@ -6,11 +6,13 @@ import ucad.sn.sociale_service.clients.DemandeurRestClient;
 import ucad.sn.sociale_service.dto.EvenementRequest;
 import ucad.sn.sociale_service.dto.EvenementResponse;
 import ucad.sn.sociale_service.entities.Evenement;
+import ucad.sn.sociale_service.enums.StatusDeclaration;
 import ucad.sn.sociale_service.mappers.EvenementMapper;
 import ucad.sn.sociale_service.models.Demandeur;
 import ucad.sn.sociale_service.repositories.EvenementRepository;
 import ucad.sn.sociale_service.services.EvenementService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,6 +48,7 @@ public class EvenementServiceImpl implements EvenementService {
         List<EvenementResponse> responseList = this.evenementRepository.
                 findAll().
                 stream().
+                sorted(Comparator.comparing(Evenement::getDatePublication).reversed()).
                 map(this.evenementMapper::convertToDTO).
                 collect(Collectors.toList());
         for (EvenementResponse response :responseList
@@ -72,5 +75,22 @@ public class EvenementServiceImpl implements EvenementService {
     @Override
     public Boolean deleteEvenement(String id) {
         return null;
+    }
+
+    @Override
+    public EvenementResponse enableEvent(String idEvent) {
+        Optional<Evenement> optionalEvenement = this.evenementRepository.findById(idEvent);
+        if(optionalEvenement.isPresent())
+        {
+            Evenement evenement = optionalEvenement.get();
+            evenement.setStatus(StatusDeclaration.VALIDATED);
+            this.evenementRepository.save(evenement);
+            Demandeur demandeur = this.demandeurRestClient.findUtilisateurById(evenement.getDemandeurId());
+            evenement.setDemandeurs(demandeur);
+            return this.evenementMapper.convertToDTO(evenement);
+
+        }
+        else
+            throw new RuntimeException("Aucun evenement ne correspond avec cet identifiant");
     }
 }

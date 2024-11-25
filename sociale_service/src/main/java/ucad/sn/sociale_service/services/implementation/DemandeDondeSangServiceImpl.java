@@ -6,6 +6,7 @@ import ucad.sn.sociale_service.clients.DemandeurRestClient;
 import ucad.sn.sociale_service.dto.DemandeDonDeSangRequest;
 import ucad.sn.sociale_service.dto.DemandeDonDeSangResponse;
 import ucad.sn.sociale_service.entities.DemandeDondeSang;
+import ucad.sn.sociale_service.enums.StatusDeclaration;
 import ucad.sn.sociale_service.mappers.DemandeDonDeSangMapper;
 import ucad.sn.sociale_service.models.Demandeur;
 import ucad.sn.sociale_service.repositories.DemandeDondeSangRepository;
@@ -73,5 +74,23 @@ public class DemandeDondeSangServiceImpl implements DemandeDondeSangService {
     @Override
     public Boolean deleteDemandeDon(String id) {
         return null;
+    }
+
+    @Override
+    public DemandeDonDeSangResponse enableDemandeDon(String idDemande) {
+        Optional<DemandeDondeSang> optionalDemandeDondeSang = this.demandeDondeSangRepository.findById(idDemande);
+        if (optionalDemandeDondeSang.isPresent())
+        {
+            DemandeDondeSang demandeDondeSang = optionalDemandeDondeSang.get();
+            demandeDondeSang.setStatus(StatusDeclaration.VALIDATED);
+            this.demandeDondeSangRepository.save(demandeDondeSang);
+            Demandeur demandeur = this.demandeurRestClient.findUtilisateurById(demandeDondeSang.getDemandeurId());
+            demandeDondeSang.setDemandeurs(demandeur);
+            return this.demandeDonDeSangMapper.convertToDTO(demandeDondeSang);
+
+
+        }
+        else
+            throw new RuntimeException("La demande de don de sang n'existe pas");
     }
 }

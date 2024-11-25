@@ -11,4 +11,5 @@ public interface DemandeDondeSangService {
     public DemandeDonDeSangResponse saveDemandeDondeSang(DemandeDonDeSangRequest request, List<MultipartFile> files);
     public DemandeDonDeSangResponse updateEvenement(DemandeDonDeSangRequest request, String id);
     public Boolean deleteDemandeDon(String id);
+    public DemandeDonDeSangResponse enableDemandeDon(String idDemande);
 }

@@ -6,6 +6,7 @@ import ucad.sn.sociale_service.clients.DemandeurRestClient;
 import ucad.sn.sociale_service.dto.UrgenceSocialeRequest;
 import ucad.sn.sociale_service.dto.UrgenceSocialeResponse;
 import ucad.sn.sociale_service.entities.UrgenceSociale;
+import ucad.sn.sociale_service.enums.StatusDeclaration;
 import ucad.sn.sociale_service.mappers.UrgenceSocialeMapper;
 import ucad.sn.sociale_service.models.Demandeur;
 import ucad.sn.sociale_service.repositories.UrgenceSocialeRepository;
@@ -62,5 +63,21 @@ public class UrgenceSocialeServiceImpl implements UrgenceSocialeService {
         Demandeur demandeur=this.demandeurRestClient.findUtilisateurById(urgenceSociale.getDemandeurId());
         urgenceSociale.setDemandeurs(demandeur);
         return this.mapper.mapToDto(this.urgenceSocialeRepository.save(urgenceSociale));
+    }
+
+    @Override
+    public UrgenceSocialeResponse enableUrgenceSociale(String id) {
+        Optional<UrgenceSociale> optional = this.urgenceSocialeRepository.findById(id);
+        if (optional.isPresent())
+        {
+            UrgenceSociale urgenceSociale = optional.get();
+            urgenceSociale.setStatus(StatusDeclaration.VALIDATED);
+            this.urgenceSocialeRepository.save(urgenceSociale);
+            Demandeur demandeur=this.demandeurRestClient.findUtilisateurById(urgenceSociale.getDemandeurId());
+            urgenceSociale.setDemandeurs(demandeur);
+            return this.mapper.mapToDto(urgenceSociale);
+        }
+        else
+            throw new RuntimeException("Aucune urgence trouvée avec cette identifiant");
     }
 }
