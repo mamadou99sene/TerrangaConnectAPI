@@ -12,6 +12,7 @@ import ucad.sn.sociale_service.models.Demandeur;
 import ucad.sn.sociale_service.repositories.DemandeDondeSangRepository;
 import ucad.sn.sociale_service.services.DemandeDondeSangService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,9 +43,10 @@ public class DemandeDondeSangServiceImpl implements DemandeDondeSangService {
     }
 
     @Override
-    public List<DemandeDonDeSangResponse> getAllDemandesDondeSang() {
+    public List<DemandeDonDeSangResponse> getAllValidedDemandesDondeSang() {
 
-        List<DemandeDonDeSangResponse> responses = this.demandeDondeSangRepository.findAll().
+        List<DemandeDonDeSangResponse> responses = this.demandeDondeSangRepository.
+                findByStatusOrderByDatePublicationDesc(StatusDeclaration.VALIDATED).
                 stream().
                 map(this.demandeDonDeSangMapper::convertToDTO).
                 collect(Collectors.toList());
@@ -55,6 +57,19 @@ public class DemandeDondeSangServiceImpl implements DemandeDondeSangService {
         }
         return responses;
 
+    }
+
+    @Override
+    public List<DemandeDonDeSangResponse> getAllDemandesDondeSang() {
+        return this.demandeDondeSangRepository.
+                findAll().
+                stream().
+                sorted(Comparator.comparing(DemandeDondeSang::getDatePublication)).
+                map(demandeDondeSang -> {
+                    Demandeur demandeur=this.demandeurRestClient.findUtilisateurById(demandeDondeSang.getDemandeurId());
+                    demandeDondeSang.setDemandeurs(demandeur);
+                    return this.demandeDonDeSangMapper.convertToDTO(demandeDondeSang);
+                }).collect(Collectors.toList());
     }
 
     @Override

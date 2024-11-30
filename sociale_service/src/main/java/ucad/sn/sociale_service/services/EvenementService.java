@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface EvenementService {
     public EvenementResponse getEvenementById(String id);
+    public List<EvenementResponse> getAllValidedEvenements();
     public List<EvenementResponse> getAllEvenements();
     public EvenementResponse saveEvenement(EvenementRequest request, List<MultipartFile> files);
     public EvenementResponse updateEvenement(EvenementRequest request, String id);

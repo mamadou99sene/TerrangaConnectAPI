@@ -22,26 +22,20 @@ public class DeclarationController {
     @GetMapping("/declarations/urgence")
     public ResponseEntity<List<UrgenceSocialeResponse>> getAllUrgenceDeclaration()
     {
-        List<UrgenceSocialeResponse> responseList=this.declarationService.getAllUrgenceDeclaration();
+        List<UrgenceSocialeResponse> responseList=this.declarationService.getAllValidedUrgenceDeclaration();
         return ResponseEntity.status(HttpStatus.OK).body(responseList);
-    }
-    @PutMapping("/declarations/urgence")
-    public ResponseEntity<UrgenceSocialeResponse> enableUrgenceSociale(String idUrgence)
-    {
-        UrgenceSocialeResponse enabled = this.declarationService.enableUrgenceSociale(idUrgence);
-        return ResponseEntity.status(HttpStatus.CREATED).body(enabled);
     }
     @GetMapping("/declarations/donSang")
     public ResponseEntity<List<DemandeDonDeSangResponse>> getAllDemandedonSangDeclaration()
     {
-        List<DemandeDonDeSangResponse> responseList=this.declarationService.getAllDemandeDonDeclaration();
+        List<DemandeDonDeSangResponse> responseList=this.declarationService.getAllValidedDemandeDonDeclaration();
         return ResponseEntity.status(HttpStatus.OK).body(responseList);
     }
 
     @GetMapping("/declarations/event")
     public ResponseEntity<List<EvenementResponse>> getAllEventDeclaration()
     {
-        List<EvenementResponse> responseList=this.declarationService.getAllEventDeclaration();
+        List<EvenementResponse> responseList=this.declarationService.getAllValidedEventDeclaration();
         return ResponseEntity.status(HttpStatus.OK).body(responseList);
     }
     @PostMapping("/declarations/urgence")
@@ -91,12 +85,6 @@ public class DeclarationController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
-    @PutMapping("/declarations/donSang")
-    public ResponseEntity<DemandeDonDeSangResponse> enableDemandeDon(String idDemande)
-    {
-        DemandeDonDeSangResponse enabledDemandeDon = this.declarationService.enableDemandeDon(idDemande);
-        return ResponseEntity.status(HttpStatus.CREATED).body(enabledDemandeDon);
-    }
     @GetMapping("/declarations/event/{idDeclaration}")
     public ResponseEntity<EvenementResponse> getDeclaratonEventByid(@PathVariable String idDeclaration)
     {
@@ -107,11 +95,23 @@ public class DeclarationController {
         }
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+    @PutMapping("/declarations/urgence")
+    public ResponseEntity<UrgenceSocialeResponse> enableUrgenceSociale(String idUrgence)
+    {
+        UrgenceSocialeResponse enabled = this.declarationService.enableUrgenceSociale(idUrgence);
+        return ResponseEntity.status(HttpStatus.CREATED).body(enabled);
+    }
     @PutMapping("/declarations/event")
     public ResponseEntity<EvenementResponse> enableEvent(String idEvent)
     {
         EvenementResponse enabledEvent = this.declarationService.enableEvent(idEvent);
         return ResponseEntity.status(HttpStatus.CREATED).body(enabledEvent);
+    }
+    @PutMapping("/declarations/donSang")
+    public ResponseEntity<DemandeDonDeSangResponse> enableDemandeDon(String idDemande)
+    {
+        DemandeDonDeSangResponse enabledDemandeDon = this.declarationService.enableDemandeDon(idDemande);
+        return ResponseEntity.status(HttpStatus.CREATED).body(enabledDemandeDon);
     }
     @PutMapping("/declarations/{id}")
     public ResponseEntity<DeclarationResponse> updateDeclaration(@RequestBody DeclarationRequest request, @PathVariable String id)
@@ -136,4 +136,24 @@ public class DeclarationController {
         List<DonResponse> donByDeclarationId = this.declarationService.getDonByDeclarationId(id);
         return ResponseEntity.status(HttpStatus.OK).body(donByDeclarationId);
     }*/
+
+    @GetMapping("/declarations/urgence/admin")
+    public ResponseEntity<List<UrgenceSocialeResponse>> getAdminAllUrgenceDeclaration()
+    {
+        List<UrgenceSocialeResponse> responseList=this.declarationService.getAllUrgenceDeclaration();
+        return ResponseEntity.status(HttpStatus.OK).body(responseList);
+    }
+    @GetMapping("/declarations/donSang/admin")
+    public ResponseEntity<List<DemandeDonDeSangResponse>> getAdminAllDemandedonSangDeclaration()
+    {
+        List<DemandeDonDeSangResponse> responseList=this.declarationService.getAllDemandeDonDeclaration();
+        return ResponseEntity.status(HttpStatus.OK).body(responseList);
+    }
+
+    @GetMapping("/declarations/event/admin")
+    public ResponseEntity<List<EvenementResponse>> getAdminAllEventDeclaration()
+    {
+        List<EvenementResponse> responseList=this.declarationService.getAllEventDeclaration();
+        return ResponseEntity.status(HttpStatus.OK).body(responseList);
+    }
 }

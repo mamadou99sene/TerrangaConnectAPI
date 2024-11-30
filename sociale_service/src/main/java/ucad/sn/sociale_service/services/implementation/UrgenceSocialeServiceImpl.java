@@ -12,6 +12,7 @@ import ucad.sn.sociale_service.models.Demandeur;
 import ucad.sn.sociale_service.repositories.UrgenceSocialeRepository;
 import ucad.sn.sociale_service.services.UrgenceSocialeService;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,9 +31,9 @@ public class UrgenceSocialeServiceImpl implements UrgenceSocialeService {
     }
 
     @Override
-    public List<UrgenceSocialeResponse> getAllUrgenceSociale() {
+    public List<UrgenceSocialeResponse> getAllValidedUrgenceSociale() {
         return this.urgenceSocialeRepository.
-                findAll().
+                findByStatusOrderByDatePublicationDesc(StatusDeclaration.VALIDATED).
                 stream().
                 map(urgenceSociale -> {
                     Demandeur demandeur=this.demandeurRestClient.findUtilisateurById(urgenceSociale.getDemandeurId());
@@ -40,6 +41,19 @@ public class UrgenceSocialeServiceImpl implements UrgenceSocialeService {
                     return this.mapper.mapToDto(urgenceSociale);
                 }).
                 collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UrgenceSocialeResponse> getAllUrgenceSociale() {
+        return this.urgenceSocialeRepository.
+                findAll().
+                stream().
+                sorted(Comparator.comparing(UrgenceSociale::getDatePublication).reversed()).
+                map(urgenceSociale -> {
+                    Demandeur demandeur=this.demandeurRestClient.findUtilisateurById(urgenceSociale.getDemandeurId());
+                    urgenceSociale.setDemandeurs(demandeur);
+                    return this.mapper.mapToDto(urgenceSociale);
+                }).collect(Collectors.toList());
     }
 
     @Override

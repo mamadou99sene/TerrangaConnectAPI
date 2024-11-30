@@ -44,11 +44,10 @@ public class EvenementServiceImpl implements EvenementService {
     }
 
     @Override
-    public List<EvenementResponse> getAllEvenements() {
+    public List<EvenementResponse> getAllValidedEvenements() {
         List<EvenementResponse> responseList = this.evenementRepository.
-                findAll().
+                findByStatusOrderByDatePublicationDesc(StatusDeclaration.VALIDATED).
                 stream().
-                sorted(Comparator.comparing(Evenement::getDatePublication).reversed()).
                 map(this.evenementMapper::convertToDTO).
                 collect(Collectors.toList());
         for (EvenementResponse response :responseList
@@ -57,6 +56,19 @@ public class EvenementServiceImpl implements EvenementService {
             response.setDemandeur(demandeur);
         }
         return responseList;
+    }
+
+    @Override
+    public List<EvenementResponse> getAllEvenements() {
+        return this.evenementRepository.
+                findAll().
+                stream().
+                sorted(Comparator.comparing(Evenement::getDatePublication).reversed()).
+                map(e ->{
+                    Demandeur d=this.demandeurRestClient.findUtilisateurById(e.getDemandeurId());
+                    e.setDemandeurs(d);
+                return this.evenementMapper.convertToDTO(e);
+                }).collect(Collectors.toList());
     }
 
     @Override

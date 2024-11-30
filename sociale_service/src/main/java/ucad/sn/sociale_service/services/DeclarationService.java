@@ -6,8 +6,11 @@ import ucad.sn.sociale_service.dto.*;
 import java.util.List;
 
 public interface DeclarationService {
+    public List<UrgenceSocialeResponse> getAllValidedUrgenceDeclaration();
     public List<UrgenceSocialeResponse> getAllUrgenceDeclaration();
+    public List<DemandeDonDeSangResponse> getAllValidedDemandeDonDeclaration();
     public List<DemandeDonDeSangResponse> getAllDemandeDonDeclaration();
+    public List<EvenementResponse> getAllValidedEventDeclaration();
     public List<EvenementResponse> getAllEventDeclaration();
     public  UrgenceSocialeResponse getUrgenceDeclarationById(String id);
     public  DemandeDonDeSangResponse getDemandeDeclarationById(String id);

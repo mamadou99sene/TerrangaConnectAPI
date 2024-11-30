@@ -30,13 +30,28 @@ public class DeclarationServiceImpl implements DeclarationService {
     }
 
     @Override
+    public List<UrgenceSocialeResponse> getAllValidedUrgenceDeclaration() {
+        return this.urgenceSocialeService.getAllValidedUrgenceSociale();
+    }
+
+    @Override
     public List<UrgenceSocialeResponse> getAllUrgenceDeclaration() {
         return this.urgenceSocialeService.getAllUrgenceSociale();
     }
 
     @Override
+    public List<DemandeDonDeSangResponse> getAllValidedDemandeDonDeclaration() {
+        return this.demandeDondeSangService.getAllValidedDemandesDondeSang();
+    }
+
+    @Override
     public List<DemandeDonDeSangResponse> getAllDemandeDonDeclaration() {
         return this.demandeDondeSangService.getAllDemandesDondeSang();
+    }
+
+    @Override
+    public List<EvenementResponse> getAllValidedEventDeclaration() {
+        return this.evenementService.getAllValidedEvenements();
     }
 
     @Override

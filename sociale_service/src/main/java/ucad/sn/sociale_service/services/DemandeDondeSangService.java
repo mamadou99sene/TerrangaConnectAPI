@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DemandeDondeSangService {
     public DemandeDonDeSangResponse getDemandeDondeSangById(String id);
+    public List<DemandeDonDeSangResponse> getAllValidedDemandesDondeSang();
     public List<DemandeDonDeSangResponse> getAllDemandesDondeSang();
     public DemandeDonDeSangResponse saveDemandeDondeSang(DemandeDonDeSangRequest request, List<MultipartFile> files);
     public DemandeDonDeSangResponse updateEvenement(DemandeDonDeSangRequest request, String id);
