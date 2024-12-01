@@ -22,15 +22,22 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
+              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public"
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/styles.min.css",
+              "node_modules/bootstrap/dist/css/bootstrap.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/sidebarmenu.js",
+              "src/assets/js/app.min.js",
+              "src/assets/js/dashboard.js"
+            ]
           },
           "configurations": {
             "production": {
