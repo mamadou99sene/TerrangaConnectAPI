@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+
 import {DeclarationService} from '../services/declaration.service';
 import {UrgenceSociale} from '../../models/UrgenceSociale';
 import {Evenement} from '../../models/Evenement';
 import {Demande_don_sang} from '../../models/Demande_don_sang';
 
 @Component({
-  imports: [CommonModule],
+  imports: [],
   selector: 'app-home-page',
   standalone: true,
   styleUrl: './home-page.component.css',

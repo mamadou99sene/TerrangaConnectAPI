@@ -197,41 +197,43 @@
         <div class="col-lg-8">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Top Paying Clients</h5>
+              <h5 class="card-title">Declarations d'urgences</h5>
               <table class="table">
                 <thead>
                 <tr>
-                  <th>Client Name</th>
-                  <th>Hourly Rate</th>
-                  <th>Extra Classes</th>
-                  <th>Status</th>
+                  <th>Demandeur</th>
+                  <th>titre</th>
+                  <th>lieu</th>
+                  <th>type</th>
+                  <th>Montant requis</th>
+                  <th>Validation</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>John Doe</td>
-                  <td>$45</td>
-                  <td>10</td>
-                  <td><span class="badge badge-status bg-primary">Available</span></td>
-                </tr>
-                <tr>
-                  <td>Sarah Smith</td>
-                  <td>$35</td>
-                  <td>8</td>
-                  <td><span class="badge badge-status bg-success">In Class</span></td>
-                </tr>
-                <tr>
-                  <td>Michael Green</td>
-                  <td>$50</td>
-                  <td>5</td>
-                  <td><span class="badge badge-status bg-danger">Absent</span></td>
-                </tr>
-                <tr>
-                  <td>Linda White</td>
-                  <td>$40</td>
-                  <td>6</td>
-                  <td><span class="badge badge-status bg-warning">On Leave</span></td>
-                </tr>
+                  @for (urgence of listUrgences; track urgence.id) {
+                    <tr>
+                      <td>{{urgence.demandeur.email}}</td>
+                      <td>{{urgence.titre}}</td>
+                      <td>{{urgence.lieu}}</td>
+                      <td>{{urgence.type}}</td>
+                      <td>{{urgence.montantRequis}} FCFA</td>
+                      <td>
+                        <button 
+                          class="btn btn-sm" 
+                          [ngClass]="{
+                            'btn-outline-success': urgence.status === 'VALIDATED',
+                            'btn-danger': urgence.status === 'PENDING'
+                          }" 
+                          (click)="valider(urgence)">
+                          @if (urgence.status === 'VALIDATED') {
+                            <i class="bi bi-check text-success fs-5"></i>
+                          } @else {
+                            <i class="bi bi-x text-white fs-5"></i>
+                          }
+                        </button>
+                      </td>
+                    </tr>
+                  }
                 </tbody>
               </table>
             </div>
