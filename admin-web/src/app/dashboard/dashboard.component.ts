@@ -4,11 +4,13 @@ import {UrgenceSociale} from '../../models/UrgenceSociale';
 import {Evenement} from '../../models/Evenement';
 import {Demande_don_sang} from '../../models/Demande_don_sang';
 import {CommonModule} from '@angular/common';
+import { AppbarComponent } from "../appbar/appbar.component";
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-dashboard',
   standalone:true,
-  imports: [CommonModule],
+  imports: [CommonModule, AppbarComponent, SidebarComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -53,7 +55,7 @@ export class DashboardComponent implements OnInit{
   }
   
   valider(urgence: UrgenceSociale) {
-    let validation=confirm("Voulez vous vraiment valider cette declaration d'urgence ?");
+    const validation=confirm("Voulez vous vraiment valider cette declaration d'urgence ?");
     if(validation)
     this.declarationService.validerUrgence(urgence).subscribe({
       next:(validedUrgence)=>{

@@ -10,9 +10,9 @@ import {Config} from '../../config/Config';
 })
 export class DeclarationService {
    headers = new HttpHeaders({
-    'Content-Type': 'application/json',  // Spécifie le type de contenu
-    'Accept': 'application/json',        // Spécifie le format de la réponse attendue
-    'Authorization': 'Bearer <votre_token>', // Si vous utilisez un token d'authentification
+    'Content-Type': 'application/json',  
+    'Accept': 'application/json',        
+    'Authorization': '', 
   });
 
   constructor(private http:HttpClient) {
@@ -33,6 +33,11 @@ export class DeclarationService {
 
   validerUrgence(urgence:UrgenceSociale)
   {
-    return this.http.put<UrgenceSociale>(Config.API_URL+Config.SOCIALE_SERVICE+"urgence?idUrgence="+urgence.id,{},{headers:this.headers});
+    return this.http.put<UrgenceSociale>(Config.API_URL+Config.SOCIALE_SERVICE+"urgence",
+      {},
+      {
+        headers:this.headers,
+        params:{idUrgence:urgence.id }
+      })
   }
 }

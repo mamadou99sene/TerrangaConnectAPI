@@ -97,8 +97,9 @@ public class DeclarationController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
     @PutMapping("/declarations/urgence")
-    public ResponseEntity<UrgenceSocialeResponse> enableUrgenceSociale(String idUrgence)
+    public ResponseEntity<UrgenceSocialeResponse> enableUrgenceSociale(@RequestParam String idUrgence)
     {
+        System.out.println(idUrgence);
         UrgenceSocialeResponse enabled = this.declarationService.enableUrgenceSociale(idUrgence);
         return ResponseEntity.status(HttpStatus.CREATED).body(enabled);
     }
