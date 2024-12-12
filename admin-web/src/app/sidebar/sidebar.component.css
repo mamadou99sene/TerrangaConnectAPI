@@ -1,0 +1,92 @@
+/* Sidebar Styles */
+.left-sidebar {
+  width: 250px;
+  background-color: #000; /* Changement de fond en noir */
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.scroll-sidebar {
+  padding: 20px;
+}
+
+.sidebar-nav {
+  margin-top: 20px;
+}
+
+.sidebar-item {
+  margin-bottom: 10px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff; /* Changement de la couleur du texte en blanc */
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-link:hover {
+  background-color: #444; /* Fond d'élément au survol */
+}
+
+/* Icônes des éléments du menu */
+.aside-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.hide-menu {
+  font-size: 14px;
+}
+
+.nav-small-cap {
+ /* Couleur des titres des sections */
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+/* Nouveau style pour les nouveaux éléments */
+.sidebar-item .ti-alert-circle {
+  color: #ff6b6b; /* Rouge pour Urgences */
+}
+
+.sidebar-item .ti-heart {
+  color: #28a745; /* Vert pour Don de sang */
+}
+
+.sidebar-item .ti-calendar {
+  color: #17a2b8; /* Bleu pour Événements */
+}
+
+/* Bouton pour ouvrir/fermer le sidebar */
+.sidebartoggler {
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+}
+
+.sidebartoggler:hover {
+  color: #ddd; /* Survol du bouton */
+}
+
+@media (max-width: 991px) {
+  .left-sidebar {
+      display: none; /* Cacher la sidebar sur les petits écrans */
+  }
+}
+
+/* Sidebar ouverte et fermée (responsive) */
+.left-sidebar.closed {
+  transform: translateX(-250px); /* Pour masquer la sidebar lorsqu'elle est fermée */
+}

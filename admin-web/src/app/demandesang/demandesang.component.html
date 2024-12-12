@@ -1,0 +1,46 @@
+<div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Demande Don Sang</h5>
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Demandeur</th>
+            <th>titre</th>
+            <th>adresse</th>
+            <th>classe</th>
+            <th>rhésus</th>
+            <th>Validation</th>
+          </tr>
+          </thead>
+          <tbody>
+            @for (demande of listDemandeSang; track demande.id) {
+              <tr>
+                <td>{{demande.demandeur.email}}</td>
+                <td>{{demande.titre}}</td>
+                <td>{{demande.adresse}}</td>
+                <td>{{demande.classe}}</td>
+                <td>{{demande.rhesus}}</td>
+                <td>
+                  <button 
+                    class="btn btn-sm" 
+                    [ngClass]="{
+                      'btn-outline-success': demande.status === 'VALIDATED',
+                      'btn-danger': demande.status === 'PENDING'
+                    }" 
+                    (click)="validerDemande(demande)">
+                    @if (demande.status === 'VALIDATED') {
+                      <i class="bi bi-check text-success fs-5"></i>
+                    } @else {
+                      <i class="bi bi-x text-white fs-5"></i>
+                    }
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
