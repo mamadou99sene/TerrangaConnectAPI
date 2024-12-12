@@ -80,53 +80,74 @@
             </div>
           </div>
         </div>
-  
-        <div class="col-lg-8">
+        
+        <div>
+          <app-urgence></app-urgence>
+        </div>
+        
+      </div>
+      
+      <!-- Row 3 -->
+      <div class="row">
+        <div class="col-lg-4">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Declarations d'urgences</h5>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th>Demandeur</th>
-                  <th>titre</th>
-                  <th>lieu</th>
-                  <th>type</th>
-                  <th>Montant requis</th>
-                  <th>Validation</th>
-                </tr>
-                </thead>
-                <tbody>
-                  @for (urgence of listUrgences; track urgence.id) {
-                    <tr>
-                      <td>{{urgence.demandeur.email}}</td>
-                      <td>{{urgence.titre}}</td>
-                      <td>{{urgence.lieu}}</td>
-                      <td>{{urgence.type}}</td>
-                      <td>{{urgence.montantRequis}} FCFA</td>
-                      <td>
-                        <button 
-                          class="btn btn-sm" 
-                          [ngClass]="{
-                            'btn-outline-success': urgence.status === 'VALIDATED',
-                            'btn-danger': urgence.status === 'PENDING'
-                          }" 
-                          (click)="valider(urgence)">
-                          @if (urgence.status === 'VALIDATED') {
-                            <i class="bi bi-check text-success fs-5"></i>
-                          } @else {
-                            <i class="bi bi-x text-white fs-5"></i>
-                          }
-                        </button>
-                      </td>
-                    </tr>
-                  }
-                </tbody>
-              </table>
+              <h5 class="card-title">Upcoming Schedules</h5>
+              <ul class="timeline-widget">
+                <li class="timeline-item">
+                  <div class="timeline-time">09:30</div>
+                  <div class="timeline-desc">Payment received from John Doe of $385.90</div>
+                </li>
+                <li class="timeline-item">
+                  <div class="timeline-time">10:00 am</div>
+                  <div class="timeline-desc">New sale recorded #ML-3467</div>
+                </li>
+                <li class="timeline-item">
+                  <div class="timeline-time">12:00 am</div>
+                  <div class="timeline-desc">Payment was made of $64.95 to Michael</div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
+        
+        <div>
+          <app-demandesang></app-demandesang>
+        </div>
+        
       </div>
+
+      
+      <!-- Row 3 -->
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Upcoming Schedules</h5>
+              <ul class="timeline-widget">
+                <li class="timeline-item">
+                  <div class="timeline-time">09:30</div>
+                  <div class="timeline-desc">Payment received from John Doe of $385.90</div>
+                </li>
+                <li class="timeline-item">
+                  <div class="timeline-time">10:00 am</div>
+                  <div class="timeline-desc">New sale recorded #ML-3467</div>
+                </li>
+                <li class="timeline-item">
+                  <div class="timeline-time">12:00 am</div>
+                  <div class="timeline-desc">Payment was made of $64.95 to Michael</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div>
+          <app-evenement></app-evenement>
+        </div>
+        
+      </div>
+
     </div>
   </div>
 
