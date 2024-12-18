@@ -27,7 +27,18 @@ export class EvenementComponent implements OnInit{
       }
     })
   }
-  validerEvenement(_t15: Evenement) {
-    throw new Error('Method not implemented.');
-    }
+  validerEvenement(evenement: Evenement) {
+   let confirm=window.confirm("Voulez vous vraiment valider cet evenement ?");
+   if(confirm)
+   {
+    this.declarationService.validerEvenement(evenement).subscribe({
+      next:(data)=>{
+        console.log("validation éfféctuée");
+        console.log(data);
+      }, error(err) {
+        console.log(err);
+      },
+    })
+   }
+}
 }

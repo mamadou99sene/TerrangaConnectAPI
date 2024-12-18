@@ -31,6 +31,15 @@ export class DemandesangComponent implements OnInit{
     })
   }
   validerDemande(demande: Demande_don_sang) {
-   
+    let confirm=window.confirm("Voulez vous vraiment valider cette demande ?");
+    if(confirm)
+      this.declarationService.validerDemandeDonSang(demande).subscribe({
+        next:(data)=>{
+          console.log("Demande de sang bien validée");
+          console.log(data);
+        }, error(err) {
+          console.log(err);
+        },
+      })
     }
 }

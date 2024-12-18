@@ -40,4 +40,21 @@ export class DeclarationService {
         params:{idUrgence:urgence.id }
       })
   }
+  validerDemandeDonSang(demande:Demande_don_sang)
+  {
+    return this.http.put<Demande_don_sang>(Config.API_URL+Config.SOCIALE_SERVICE+"donSang",
+       {}, 
+       {
+        headers:this.headers,
+         params:{idDemande: demande.id}
+        });
+  }
+  validerEvenement(event:Evenement)
+  {
+    return this.http.put<Evenement>(Config.API_URL+Config.SOCIALE_SERVICE+"event",
+      {},
+    {headers:this.headers,
+      params: {idEvent:event.id}
+    })
+  }
 }

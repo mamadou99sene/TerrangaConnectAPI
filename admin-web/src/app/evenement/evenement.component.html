@@ -18,9 +18,12 @@
               <tr>
                 <td>{{evenement.demandeur.email}}</td>
                 <td>{{evenement.titre}}</td>
-                <td>{{evenement.lieu}}</td>
+                <td>
+                  <i class="bi bi-geo-alt-fill me-1 text-warning"></i>
+                  {{evenement.lieu}}
+                </td>
                 <td>{{evenement.type}}</td>
-                <td>du {{evenement.dateDebut}} au {{evenement.dateFin}}</td>
+                <td ngClass="{{evenement.dateDebut?'bg bg-light':'bg bg-danger'}}">du {{evenement.dateDebut | date:'dd/MM/yy'}} au {{evenement.dateFin | date:'dd/MM/yy'}}</td>
                 <td>
                   <button 
                     class="btn btn-sm" 
