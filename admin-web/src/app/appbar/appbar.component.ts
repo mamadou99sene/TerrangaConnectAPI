@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DeclarationService } from '../services/declaration.service';
 
 @Component({
   selector: 'app-appbar',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './appbar.component.css'
 })
 export class AppbarComponent {
+  constructor(public declarationService: DeclarationService)
+  {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    console.log(declarationService.getNumberNotification());
+  }
 
 }

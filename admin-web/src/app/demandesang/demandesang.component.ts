@@ -25,6 +25,12 @@ export class DemandesangComponent implements OnInit{
     this.declarationService.getAdminAllDemandeDonSang().subscribe({
       next:(data)=>{
        this.listDemandeSang=data;
+       data.forEach(item=>{
+        if(item.status!="VALIDATED")
+        {
+          DeclarationService.numberDeclarationNotValided++;
+        }
+       })
       },error:err => {
         console.log(err);
       }

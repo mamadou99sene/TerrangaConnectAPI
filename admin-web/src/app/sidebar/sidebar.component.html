@@ -6,7 +6,7 @@
           </a>
           <!-- Bouton d'ouverture/fermeture du sidebar -->
           <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-              <i class="ti ti-menu-2 fs-8"></i>
+              <i class="ti ti-menu-2 fs-8 bg"></i>
           </div>
       </div>
       <nav class="sidebar-nav">
@@ -26,7 +26,7 @@
               
               <!-- Nouveaux items ajoutés -->
               <li class="sidebar-item">
-                  <a class="sidebar-link sidebar-link" href="javascript:void(0)">
+                  <a class="sidebar-link sidebar-link" (click)="navigateUrgences()">
                       <span class="aside-icon p-2 bg-light-danger rounded-3">
                           <i class="ti ti-alert-circle fs-7 text-danger"></i>
                       </span>

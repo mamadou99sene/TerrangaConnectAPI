@@ -22,6 +22,12 @@ export class EvenementComponent implements OnInit{
     this.declarationService.getAdminAllEvenement().subscribe({
       next:(data)=>{
        this.listEvenements=data;
+       data.forEach(item=>{
+        if(item.status!="VALIDATED")
+        {
+          DeclarationService.numberDeclarationNotValided++;
+        }
+       })
       },error:err => {
         console.log(err);
       }

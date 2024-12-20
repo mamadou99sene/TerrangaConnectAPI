@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UrgenceSociale } from '../../models/UrgenceSociale';
 import { DeclarationService } from '../services/declaration.service';
 import { CommonModule } from '@angular/common';
+import { AppbarComponent } from "../appbar/appbar.component";
+import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-urgence',
-  imports: [CommonModule],
+  imports: [CommonModule, AppbarComponent, SidebarComponent],
   templateUrl: './urgence.component.html',
   styleUrl: './urgence.component.css'
 })
@@ -23,6 +25,12 @@ export class UrgenceComponent implements OnInit{
     this.declarationService.getAdminAllUrgencesSociale().subscribe({
       next:(data)=>{
         this.listUrgences=data;
+        data.forEach(item=>{
+          if(item.status!="VALIDATED")
+          {
+            DeclarationService.numberDeclarationNotValided++;
+          }
+        })
       },error:err => {
         console.log(err);
       }

@@ -9,6 +9,8 @@ import {Config} from '../../config/Config';
   providedIn: 'root',
 })
 export class DeclarationService {
+
+  static numberDeclarationNotValided:number=0;
    headers = new HttpHeaders({
     'Content-Type': 'application/json',  
     'Accept': 'application/json',        
@@ -56,5 +58,9 @@ export class DeclarationService {
     {headers:this.headers,
       params: {idEvent:event.id}
     })
+  }
+  getNumberNotification()
+  {
+    return DeclarationService.numberDeclarationNotValided;
   }
 }
