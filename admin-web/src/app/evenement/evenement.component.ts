@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Evenement } from '../../models/Evenement';
 import { CommonModule } from '@angular/common';
 import { DeclarationService } from '../services/declaration.service';
+import { AppbarComponent } from '../appbar/appbar.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-evenement',
-  imports: [CommonModule],
+  imports: [CommonModule, AppbarComponent, SidebarComponent],
   templateUrl: './evenement.component.html',
   styleUrl: './evenement.component.css'
 })
 export class EvenementComponent implements OnInit{
-  listEvenements:Array<Evenement>=[];
+  listEvenements=signal<Array<Evenement>>([]);
   ngOnInit(): void {
     this.loadAdminAllEvenement();
   }
@@ -21,7 +23,7 @@ export class EvenementComponent implements OnInit{
   {
     this.declarationService.getAdminAllEvenement().subscribe({
       next:(data)=>{
-       this.listEvenements=data;
+       this.listEvenements.set(data)
        data.forEach(item=>{
         if(item.status!="VALIDATED")
         {

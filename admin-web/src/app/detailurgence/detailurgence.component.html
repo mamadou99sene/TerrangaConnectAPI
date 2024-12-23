@@ -1,0 +1,97 @@
+<div class="main-container">
+    <app-appbar></app-appbar>
+    <div class="content-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-content">
+            <div class="container py-4">
+            <div class="card shadow-sm">
+                <!-- En-tête reste le même -->
+                <div class="card-header bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0">{{ urgence.titre }}</h2>
+                    <div class="d-flex gap-2">
+                    <span [class]="'badge ' + getStatusClass()">{{ urgence.status }}</span>
+                    <span class="badge bg-primary">{{ urgence.type }}</span>
+                    </div>
+                </div>
+                </div>
+            
+                <!-- Corps -->
+                <div class="card-body">
+                <!-- Grille d'images -->
+                <div class="row g-3 mb-4">
+                    @for (image of urgence.images; track $index) {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="image-container">
+                                <img [src]="image" 
+                                    class="img-fluid rounded shadow-sm" 
+                                    alt="Image urgence"
+                                    (click)="openImageModal(image)">
+                            </div>
+                            </div>
+                    }
+                 
+                </div>
+            
+                <!-- Le reste du contenu reste identique -->
+                <div class="row g-4">
+                    <div class="col-md-8">
+                    <div class="card h-100">
+                        <div class="card-body">
+                        <h5 class="card-title">Description</h5>
+                        <p class="card-text">{{ urgence.description }}</p>
+                        
+                        <hr>
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+                            <span>{{ urgence.lieu }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar-event text-primary me-2"></i>
+                            <span>Publié le {{ formatDate(urgence.datePublication) }}</span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+            
+                    <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                        <h5 class="card-title">Informations du demandeur</h5>
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-envelope text-primary me-2"></i>
+                            <span>{{ urgence.demandeur.email }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-telephone text-primary me-2"></i>
+                            <span>{{ urgence.demandeur.telephone }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            <span>Score: {{ urgence.demandeur.score }}</span>
+                        </div>
+            
+                        <hr>
+            
+                        <h5 class="card-title">Montant requis</h5>
+                        <p class="fs-4 fw-bold text-primary">{{ formatMontant(urgence.montantRequis) }}</p>
+                        
+                        <button class="btn btn-primary w-100">
+                            <i class="bi bi-heart-fill me-2"></i>
+                            Faire un don
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>

@@ -13,10 +13,11 @@
           <th>type</th>
           <th>Montant requis</th>
           <th>Validation</th>
+          <th>Details</th>
         </tr>
         </thead>
         <tbody>
-          @for (urgence of listUrgences; track urgence.id) {
+          @for (urgence of listUrgences(); track urgence.id) {
             <tr>
               <td>{{urgence.demandeur.email}}</td>
               <td>{{urgence.titre}}</td>
@@ -41,6 +42,7 @@
                   }
                 </button>
               </td>
+              <td> <button (click)="navigatedetailsUrgence(urgence)"> <i class="bi bi-geo-alt-fill"></i></button></td>
             </tr>
           }
         </tbody>

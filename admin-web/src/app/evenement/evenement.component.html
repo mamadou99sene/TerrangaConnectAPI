@@ -1,3 +1,5 @@
+<app-appbar></app-appbar>
+<app-sidebar></app-sidebar>
 <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
@@ -9,12 +11,13 @@
             <th>titre</th>
             <th>lieu</th>
             <th>type</th>
-            <th>Date</th>
+            <th>Debut</th>
+            <th>Fin</th>
             <th>Validation</th>
           </tr>
           </thead>
           <tbody>
-            @for (evenement of listEvenements; track evenement.id) {
+            @for (evenement of listEvenements(); track evenement.id) {
               <tr>
                 <td>{{evenement.demandeur.email}}</td>
                 <td>{{evenement.titre}}</td>
@@ -23,7 +26,8 @@
                   {{evenement.lieu}}
                 </td>
                 <td>{{evenement.type}}</td>
-                <td ngClass="{{evenement.dateDebut?'bg bg-light':'bg bg-danger'}}">du {{evenement.dateDebut | date:'dd/MM/yy'}} au {{evenement.dateFin | date:'dd/MM/yy'}}</td>
+                <td ngClass="{{evenement.dateDebut?'bg bg-light':'bg bg-success'}}">du {{evenement.dateDebut | date:'dd/MM/yy HH:mm'}}</td>
+                <td ngClass="{{evenement.dateFin?'bg bg-danger text-white':'bg bg-danger'}}">au {{evenement.dateFin | date:'dd/MM/yy HH:mm'}}</td>
                 <td>
                   <button 
                     class="btn btn-sm" 
