@@ -16,4 +16,12 @@ navigateUrgences() {
   this.router.navigateByUrl("urgences");
 }
 
+navigateEvents() {
+this.router.navigateByUrl("events");
+  }
+  navigateDemandes() {
+    this.router.navigateByUrl("demandes");
+ 
+  }
+
 }

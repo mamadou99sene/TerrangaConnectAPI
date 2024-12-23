@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { UrgenceSociale } from '../../models/UrgenceSociale';
 import { DeclarationService } from '../services/declaration.service';
 import { CommonModule } from '@angular/common';
 import { AppbarComponent } from "../appbar/appbar.component";
 import { SidebarComponent } from "../sidebar/sidebar.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-urgence',
@@ -15,16 +16,16 @@ export class UrgenceComponent implements OnInit{
   ngOnInit(): void {
     this.loadAdminAllUrgencesSociale();
   }
-  constructor(private declarationService :DeclarationService)
+  constructor(private declarationService :DeclarationService, private router:Router)
   {
 
   }
-  listUrgences:Array<UrgenceSociale>=[];
+  listUrgences=signal<Array<UrgenceSociale>>([]);
   loadAdminAllUrgencesSociale()
   {
     this.declarationService.getAdminAllUrgencesSociale().subscribe({
       next:(data)=>{
-        this.listUrgences=data;
+        this.listUrgences.set(data);
         data.forEach(item=>{
           if(item.status!="VALIDATED")
           {
@@ -43,9 +44,14 @@ export class UrgenceComponent implements OnInit{
       next:(validedUrgence)=>{
       console.log(validedUrgence);
       }, error(err) {
-        console.log("++++++++++++++++++++++++++");
-        console.log(err);
+              console.log(err);
       },
     });
     }
+    navigatedetailsUrgence(urgence: UrgenceSociale) {
+     this.router.navigate(["/detailsUrgence"], 
+      {
+        queryParams:{urgence:JSON.stringify(urgence)}
+      });
+      }
 }
