@@ -40,18 +40,18 @@
                     </span>
                   </td>
                   <td>
-                    <button 
+                    <button
                       class="btn btn-action btn-validate"
                       [class.validated]="evenement.status === 'VALIDATED'"
                       (click)="validerEvenement(evenement)">
-                      <i class="bi" 
+                      <i class="bi"
                          [class.bi-check-lg]="evenement.status === 'VALIDATED'"
                          [class.bi-x-lg]="evenement.status !== 'VALIDATED'">
                       </i>
                     </button>
                   </td>
                   <td>
-                    <button class="btn btn-action btn-details" 
+                    <button class="btn btn-action btn-details"
                             (click)="navigateEvent(evenement)">
                       <i class="bi bi-arrow-right"></i>
                     </button>
