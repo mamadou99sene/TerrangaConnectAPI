@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DeclarationService } from '../services/declaration.service';
 import { AppbarComponent } from '../appbar/appbar.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-evenement',
@@ -12,11 +13,12 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrl: './evenement.component.css'
 })
 export class EvenementComponent implements OnInit{
+
   listEvenements=signal<Array<Evenement>>([]);
   ngOnInit(): void {
     this.loadAdminAllEvenement();
   }
-  constructor(private declarationService:DeclarationService){
+  constructor(private declarationService:DeclarationService, private router:Router){
 
   }
   loadAdminAllEvenement()
@@ -49,4 +51,19 @@ export class EvenementComponent implements OnInit{
     })
    }
 }
+navigateEvent(evenement: Evenement) {
+ this.router.navigate(["/detailsEvent"],
+  {
+    state: {evenement},
+  })
+  }
+  formatDate(date: Date): string {
+    return new Date(date).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    });
+  }
 }

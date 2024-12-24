@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { UrgenceSociale } from '../../models/UrgenceSociale';
 import { CommonModule } from '@angular/common';
 import { AppbarComponent } from "../appbar/appbar.component";
@@ -14,14 +14,17 @@ import { SidebarComponent } from "../sidebar/sidebar.component";
 export class DetailurgenceComponent implements OnInit{
   urgence!: UrgenceSociale;
   ngOnInit(): void {
-    this.activate.queryParams.subscribe(params=>{
+    /*this.activate.queryParams.subscribe(params=>{
       this.urgence=JSON.parse(params["urgence"]);
       console.log(this.urgence);
-    })
+    })*/
+   
   }
-  constructor(private activate: ActivatedRoute)
+  constructor(private router: Router)
   {
-
+    const state=this.router.getCurrentNavigation()?.extras?.state;
+   this.urgence=state?.['urgence'];
+   console.log(this.urgence);
   }
   getStatusClass() {
     switch(this.urgence.status) {

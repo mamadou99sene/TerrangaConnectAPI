@@ -1,0 +1,168 @@
+/* Main Layout Adjustments */
+.main-content {
+    padding-top: 80px;
+    margin-left: 250px;
+    min-height: calc(100vh - 64px);
+    background-color: #f8f9fa;
+    transition: all 0.3s;
+  }
+  
+  /* Card & Table Container */
+  .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+  }
+  
+  .card-title {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: #dc3545;
+    border-radius: 2px;
+  }
+  
+  /* Table Styles */
+  .table {
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  
+  .table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 1rem;
+    white-space: nowrap;
+  }
+  
+  .table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
+  }
+  
+  /* Location Cell Style */
+  .location-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .bi-geo-alt-fill {
+    color: #ffc107;
+    font-size: 1.1rem;
+  }
+  
+  /* Amount Cell Style */
+  .amount-cell {
+    background-color: #f8f9fa;
+    color: #198754;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  
+  /* Button Styles */
+  .btn-action {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+  }
+  
+  .btn-validate {
+    background-color: transparent;
+  }
+  
+  .btn-validate.validated {
+    border-color: #198754;
+    color: #198754;
+  }
+  
+  .btn-validate.validated:hover {
+    background-color: #198754;
+    color: white;
+  }
+  
+  .btn-validate.pending {
+    border-color: #dc3545;
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn-validate.pending:hover {
+    background-color: #bb2d3b;
+  }
+  
+  .btn-details {
+    border-color: #0d6efd;
+    color: #0d6efd;
+    background-color: transparent;
+  }
+  
+  .btn-details:hover {
+    background-color: #0d6efd;
+    color: white;
+  }
+  
+  /* Icon Styles */
+  .btn-action i {
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+  
+  .btn-action:hover i {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 991.98px) {
+    .main-content {
+      margin-left: 0;
+    }
+    
+    .table-responsive {
+      overflow-x: auto;
+    }
+    
+    .table td, .table th {
+      min-width: 120px;
+    }
+    
+    .amount-cell {
+      font-size: 0.85rem;
+    }
+  }
+  
+  /* Hover Effects */
+  .table tbody tr {
+    transition: background-color 0.2s ease;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }

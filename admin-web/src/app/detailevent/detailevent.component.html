@@ -1,1 +1,103 @@
-<p>detailevent works!</p>
+<div class="main-container">
+    <app-appbar></app-appbar>
+    <div class="content-wrapper">
+      <app-sidebar></app-sidebar>
+      <div class="main-content">
+            <div class="container py-4">
+            <div class="card shadow-sm">
+                <!-- En-tête reste le même -->
+                <div class="card-header bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0">{{ evenement.titre }}</h2>
+                    <div class="d-flex gap-2">
+                    <span [class]="'badge ' + getStatusClass()">{{ evenement.status }}</span>
+                    <span class="badge bg-primary">{{ evenement.type }}</span>
+                    </div>
+                </div>
+                </div>
+            
+                <!-- Corps -->
+                <div class="card-body">
+                <!-- Grille d'images -->
+                <div class="row g-3 mb-4">
+                    @for (image of evenement.images; track $index) {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="image-container">
+                                <img [src]="image" 
+                                    class="img-fluid rounded shadow-sm" 
+                                    alt="Image evenement"
+                                    (click)="openImageModal(image)">
+                            </div>
+                            </div>
+                    }
+                 
+                </div>
+            
+                <!-- Le reste du contenu reste identique -->
+                <div class="row g-4">
+                    <div class="col-md-8">
+                    <div class="card h-100">
+                        <div class="card-body">
+                        <h5 class="card-title">Description</h5>
+                        <p class="card-text">{{ evenement.description }}</p>
+                        
+                        <hr>
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-geo-alt-fill text-warning me-2"></i>
+                            <span>{{ evenement.lieu }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar-event text-primary me-2"></i>
+                            <span>Publié le {{ formatDate(evenement.datePublication) }}</span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+            
+                    <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                        <h5 class="card-title">Informations du demandeur</h5>
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-envelope text-primary me-2"></i>
+                            <span>{{ evenement.demandeur.email }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-2">
+                            <i class="bi bi-telephone text-primary me-2"></i>
+                            <span>{{ evenement.demandeur.telephone }}</span>
+                        </div>
+                        
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="bi bi-star-fill text-warning me-2"></i>
+                            <span>Score: {{ evenement.demandeur.score }}</span>
+                        </div>
+            
+                        <hr>
+                        <h5 class="card-title">Calendrier</h5>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar-event text-primary me-2"></i>
+                            <span>Debut {{ formatDate(evenement.dateDebut) }}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar-event text-danger me-2"></i>
+                            <span>Fin {{ formatDate(evenement.dateFin) }}</span>
+                        </div>
+                        
+                        <button class="btn btn-primary w-100 mt-3">
+                            <i class="bi bi-heart-fill me-2"></i>
+                            Faire un don
+                        </button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>

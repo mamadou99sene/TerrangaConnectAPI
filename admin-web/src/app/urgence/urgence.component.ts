@@ -51,7 +51,17 @@ export class UrgenceComponent implements OnInit{
     navigatedetailsUrgence(urgence: UrgenceSociale) {
      this.router.navigate(["/detailsUrgence"], 
       {
-        queryParams:{urgence:JSON.stringify(urgence)}
+        //queryParams:{urgence:JSON.stringify(urgence)}
+        state:{urgence}
       });
+      }
+      formatDate(date: Date): string {
+        return new Date(date).toLocaleDateString('fr-FR', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric'
+        });
       }
 }
