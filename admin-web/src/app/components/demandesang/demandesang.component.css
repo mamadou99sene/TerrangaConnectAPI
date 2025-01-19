@@ -1,0 +1,20 @@
+  
+  
+/* Layout Adjustments */
+.main-container {
+  margin-top: 60px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.main-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+  width: calc(100% - 250px);
+}
+
+.main-content.expanded {
+  margin-left: 0;
+  width: 100%;
+}

@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import {DashboardComponent} from './dashboard/dashboard.component';
-import { UrgenceComponent } from './urgence/urgence.component';
-import { EvenementComponent } from './evenement/evenement.component';
-import { DemandesangComponent } from './demandesang/demandesang.component';
-import { DetailurgenceComponent } from './detailurgence/detailurgence.component';
-import { DetaileventComponent } from './detailevent/detailevent.component';
+import {DashboardComponent} from './components/dashboard/dashboard.component';
+import { UrgenceComponent } from './components/urgence/urgence.component';
+import { EvenementComponent } from './components/evenement/evenement.component';
+import { DemandesangComponent } from './components/demandesang/demandesang.component';
+import { DetailurgenceComponent } from './components/detailurgence/detailurgence.component';
+import { DetaileventComponent } from './components/detailevent/detailevent.component';
 
 export const routes: Routes = [
   {path:'', component:DashboardComponent},

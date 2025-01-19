@@ -1,0 +1,46 @@
+.main-container {
+  margin-top: 60px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.main-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+  width: calc(100% - 250px);
+}
+
+.main-content.expanded {
+  margin-left: 0;
+  width: 100%;
+}
+
+.stat-card {
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.total-transfers {
+  background: linear-gradient(135deg, #8B4513 0%, #DEB887 100%) !important;
+  color: white !important;
+}
+
+.en-attente {
+  background: linear-gradient(135deg, #000000 0%, #4A4A4A 100%) !important;
+  color: white !important;
+}
+
+.btn-outline-brown {
+  color: #8B4513;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+}
