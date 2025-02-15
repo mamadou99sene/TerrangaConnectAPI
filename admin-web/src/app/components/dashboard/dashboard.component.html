@@ -9,63 +9,68 @@
           <div class="main-content" id="main-content" [class.expanded]="isCollapsed">
               <!-- Statistics Cards -->
               <div class="row g-3 mb-2">
-                  <div class="col-12 col-md-6 col-lg-3">
-                      <div class="card stat-card en-attente bg-opacity-75 text-white h-75 d-flex flex-column">
-                          <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                  <div>
-                                      <h3 class="card-title mb-0">0</h3>
-                                      <p class="card-text">Déclarations publiées</p>
-                                  </div>
-                                  <i class="bi bi-clock-history fs-1"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-3">
-                      <div class="card stat-card en-attente text-white h-75 d-flex flex-column">
-                          <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                  <div>
-                                      <h3 class="card-title mb-0">1</h3>
-                                      <p class="card-text">EN ATTENTE</p>
-                                  </div>
-                                  <i class="bi bi-hourglass-split fs-1"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-3">
-                      <div class="card stat-card total-transfers text-white h-75 d-flex flex-column">
-                          <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                  <div>
-                                      <h3 class="card-title mb-0">308</h3>
-                                      <p class="card-text">Interventions</p>
-                                  </div>
-                                  <i class="bi bi-exclamation-triangle fs-1"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-
-                  <div class="col-12 col-md-6 col-lg-3">
-                      <div class="card stat-card total-transfers h-75 d-flex flex-column">
-                          <div class="card-body">
-                              <div class="d-flex justify-content-between">
-                                  <div>
-                                      <h3 class="card-title mb-0">96 654 517</h3>
-                                      <p class="card-text">Assistance</p>
-                                      <span class="currency pb-4">XOF</span>
-                                  </div>
-                                  <i class="bi bi-cash-stack fs-1"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <!-- Déclarations publiées -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card stat-card published-declarations bg-success bg-opacity-75 text-white h-75 d-flex flex-column">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="card-title mb-0">0</h3>
+                                    <p class="card-text">Déclarations publiées</p>
+                                </div>
+                                <i class="bi bi-megaphone-fill fs-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Demandes en attente -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card stat-card pending bg-warning bg-opacity-75 text-white h-75 d-flex flex-column">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="card-title mb-0">1</h3>
+                                    <p class="card-text">Demandes en attente</p>
+                                </div>
+                                <i class="bi bi-droplet-fill fs-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Interventions d'urgence -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card stat-card emergency bg-danger bg-opacity-75 text-white h-75 d-flex flex-column">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="card-title mb-0">308</h3>
+                                    <p class="card-text">Interventions d'urgence</p>
+                                </div>
+                                <i class="bi bi-heart-pulse-fill fs-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Assistance financière -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="card stat-card assistance bg-info bg-opacity-75 text-white h-75 d-flex flex-column">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h3 class="card-title mb-0">96 654 517</h3>
+                                    <p class="card-text">Assistance</p>
+                                    <span class="currency pb-4">XOF</span>
+                                </div>
+                                <i class="bi bi-people-fill fs-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
               <!--graphique -->
               <div class="row mb-4">
                   <div class="col-12 col-lg-4">
@@ -82,118 +87,17 @@
                           </div>
                       </div>
                   </div>
-                  <!-- <div class="col-12 col-lg-4">
+                  <div class="col-12 col-lg-4">
                       <div class="card">
                           <div class="card-body">
                               <canvas id="validationStatusChart"></canvas>
                           </div>
                       </div>
-                  </div> -->
+                  </div>
               </div>
               
               <!-- Transactions Table -->
-              <div class="card">
-                  <div class="card-body">
-                      <div class="table-responsive">
-                          <table class="table table-hover">
-                              <thead>
-                                  <tr>
-                                      <th>Référence</th>
-                                      <th>Produit</th>
-                                      <th>Nombre de virements</th>
-                                      <th>Montant total</th>
-                                      <th>Date de soumission</th>
-                                      <th>Date de traitement</th>
-                                      <th>Statut</th>
-                                      <th>Action</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td class="text-truncate">AZZZZ</td>
-                                      <td>BDK</td>
-                                      <td>23</td>
-                                      <td>5000 XOF</td>
-                                      <td>12-08-2002</td>
-                                      <td>12-09-2300</td>
-                                      <td>
-                                          <span class="badge rounded-pill bg-success bg-opacity-75">SUCCES</span>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-sm btn-outline-brown btn-outline-secondary">
-                                              <i class="bi bi-eye me-1"></i>Consulter
-                                          </button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td class="text-truncate">AZZZZ</td>
-                                      <td>BDK</td>
-                                      <td>23</td>
-                                      <td>5000 XOF</td>
-                                      <td>12-08-2002</td>
-                                      <td>12-09-2300</td>
-                                      <td>
-                                          <span class="badge rounded-pill bg-success bg-opacity-75">SUCCES</span>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-sm btn-outline-brown btn-outline-secondary">
-                                              <i class="bi bi-eye me-1"></i>Consulter
-                                          </button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td class="text-truncate">AZZZZ</td>
-                                      <td>BDK</td>
-                                      <td>23</td>
-                                      <td>5000 XOF</td>
-                                      <td>12-08-2002</td>
-                                      <td>12-09-2300</td>
-                                      <td>
-                                          <span class="badge rounded-pill bg-danger bg-opacity-75">ECHEC</span>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-sm btn-outline-brown btn-outline-secondary">
-                                              <i class="bi bi-eye me-1"></i>Consulter
-                                          </button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td class="text-truncate">AZZZZ</td>
-                                      <td>BDK</td>
-                                      <td>23</td>
-                                      <td>5000 XOF</td>
-                                      <td>12-08-2002</td>
-                                      <td>12-09-2300</td>
-                                      <td>
-                                          <span class="badge rounded-pill bg-success bg-opacity-75">SUCCES</span>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-sm btn-outline-brown btn-outline-secondary">
-                                              <i class="bi bi-eye me-1"></i>Consulter
-                                          </button>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td class="text-truncate">AZZZZ</td>
-                                      <td>BDK</td>
-                                      <td>23</td>
-                                      <td>5000 XOF</td>
-                                      <td>12-08-2002</td>
-                                      <td>12-09-2300</td>
-                                      <td>
-                                          <span class="badge rounded-pill bg-warning bg-opacity-75">EN COURS</span>
-                                      </td>
-                                      <td>
-                                          <button class="btn btn-sm btn-outline-brown btn-outline-secondary">
-                                              <i class="bi bi-eye me-1"></i>Consulter
-                                          </button>
-                                      </td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
+             
           </div>
       </div>
   </div>

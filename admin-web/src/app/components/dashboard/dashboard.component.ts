@@ -53,8 +53,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadDeclarationData();
     this.createDeclarationTypeChart();
-   /*  this.createInterventionTrendChart();
-    this.createValidationStatusChart(); */
+    this.createInterventionTrendChart();
+    this.createValidationStatusChart();
   }
 
   loadDeclarationData(): void {

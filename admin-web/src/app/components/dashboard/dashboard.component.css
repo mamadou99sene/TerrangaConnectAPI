@@ -23,24 +23,39 @@
 .stat-card:hover {
   transform: translateY(-5px);
 }
-
-.total-transfers {
-  background: linear-gradient(135deg, #8B4513 0%, #DEB887 100%) !important;
-  color: white !important;
+.stat-card {
+  transition: transform 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.en-attente {
-  background: linear-gradient(135deg, #000000 0%, #4A4A4A 100%) !important;
-  color: white !important;
+.stat-card:hover {
+  transform: translateY(-5px);
 }
 
-.btn-outline-brown {
-  color: #8B4513;
+.published-declarations {
+  background-color: #28a745;
 }
 
-@media (max-width: 768px) {
-  .main-content {
-    margin-left: 0;
-    width: 100%;
-  }
+.pending {
+  background-color: #ffc107;
+}
+
+.emergency {
+  background-color: #dc3545;
+}
+
+.assistance {
+  background-color: #17a2b8;
+}
+
+.currency {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
