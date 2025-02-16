@@ -52,9 +52,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDeclarationData();
-    this.createDeclarationTypeChart();
+    setTimeout(() => {
+      this.createDeclarationTypeChart();
     this.createInterventionTrendChart();
     this.createValidationStatusChart();
+    }, 500);
   }
 
   loadDeclarationData(): void {
@@ -62,7 +64,6 @@ export class DashboardComponent implements OnInit {
       next:urgences=>{
         this.declarationStats.urgencesSociales = urgences.length;
         this.updateTotalDeclarations();
-        console.log("=====urgence"+this.declarationStats.urgencesSociales)
       },error(err) {
         console.log(err);
       },
@@ -72,7 +73,6 @@ export class DashboardComponent implements OnInit {
       next:demandes=>{
         this.declarationStats.demandesSang = demandes.length;
         this.updateTotalDeclarations();
-       console.log("=========>demande"+this.declarationStats.demandesSang)
       }, error(err) {
         console.log(err);
       },
@@ -93,6 +93,7 @@ export class DashboardComponent implements OnInit {
       this.declarationStats.urgencesSociales + 
       this.declarationStats.demandesSang + 
       this.declarationStats.evenements;
+      console.log(this.declarationStats.urgencesSociales)
   }
 
   createDeclarationTypeChart(): void {
@@ -117,6 +118,7 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
+        maintainAspectRatio:false,
         plugins: {
           title: {
             display: true,
@@ -160,6 +162,7 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
+        maintainAspectRatio:false,
         plugins: {
           title: {
             display: true,
@@ -201,6 +204,7 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
+        maintainAspectRatio:false,
         plugins: {
           title: {
             display: true,

@@ -15,7 +15,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h3 class="card-title mb-0">0</h3>
+                                    <h3 class="card-title mb-0">{{declarationStats.total}}</h3>
                                     <p class="card-text">Déclarations publiées</p>
                                 </div>
                                 <i class="bi bi-megaphone-fill fs-1"></i>
@@ -45,7 +45,7 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h3 class="card-title mb-0">308</h3>
+                                    <h3 class="card-title mb-0">{{declarationStats.urgencesSociales}}</h3>
                                     <p class="card-text">Interventions d'urgence</p>
                                 </div>
                                 <i class="bi bi-heart-pulse-fill fs-1"></i>
@@ -60,9 +60,9 @@
                         <div class="card-body">
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <h3 class="card-title mb-0">96 654 517</h3>
+                                    <h3 class="card-title mb-0">517</h3>
                                     <p class="card-text">Assistance</p>
-                                    <span class="currency pb-4">XOF</span>
+                                    <span class="currency pb-4">AS</span>
                                 </div>
                                 <i class="bi bi-people-fill fs-1"></i>
                             </div>
@@ -73,28 +73,34 @@
             
               <!--graphique -->
               <div class="row mb-4">
-                  <div class="col-12 col-lg-4">
-                      <div class="card">
-                          <div class="card-body">
-                              <canvas id="declarationTypeChart"></canvas>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-12 col-lg-4" >
-                      <div class="card">
-                          <div class="card-body">
-                              <canvas id="interventionTrendChart" height="220"></canvas>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-12 col-lg-4">
-                      <div class="card">
-                          <div class="card-body">
-                              <canvas id="validationStatusChart"></canvas>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card chart-card">
+                        <div class="card-body d-flex flex-column">
+                            <div class="chart-container">
+                                <canvas id="declarationTypeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card chart-card">
+                        <div class="card-body d-flex flex-column">
+                            <div class="chart-container">
+                                <canvas id="interventionTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="card chart-card">
+                        <div class="card-body d-flex flex-column">
+                            <div class="chart-container">
+                                <canvas id="validationStatusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
               
               <!-- Transactions Table -->
              

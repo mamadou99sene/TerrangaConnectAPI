@@ -16,10 +16,6 @@
   width: 100%;
 }
 
-.stat-card {
-  transition: transform 0.2s;
-}
-
 .stat-card:hover {
   transform: translateY(-5px);
 }
@@ -58,4 +54,28 @@
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+.chart-card {
+  height: 100%;
+  min-height: 400px; /* Hauteur minimale fixe */
+}
+
+.chart-card .card-body {
+  padding: 1.25rem;
+  height: 100%;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px; /* Hauteur minimale pour le conteneur du graphique */
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .chart-card {
+      margin-bottom: 1rem;
+      min-height: 350px;
+  }
 }

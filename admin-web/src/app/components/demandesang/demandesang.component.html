@@ -21,6 +21,7 @@
                           <th>Classe</th>
                           <th>Rhésus</th>
                           <th>Validation</th>
+                          <th>Details</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -58,6 +59,12 @@
                                 } @else {
                                   <i class="bi bi-x-lg text-white"></i>
                                 }
+                              </button>
+                            </td>
+                            <td>
+                              <button class="btn btn-action btn-details" 
+                                      (click)="navigatedetailsDemande(demande)">
+                                <i class="bi bi-arrow-right"></i>
                               </button>
                             </td>
                           </tr>

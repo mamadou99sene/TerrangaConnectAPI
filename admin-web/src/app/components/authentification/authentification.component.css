@@ -1,0 +1,57 @@
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-image: url('/assets/images/background.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .auth-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .auth-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 15px;
+  }
+
+  .form-control {
+    height: 48px;
+  }
+
+  .input-group-text {
+    background-color: transparent;
+    border-right: none;
+  }
+
+  .form-control {
+    border-left: none;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+  }
+
+  .input-group:focus-within {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+
+  .btn-primary {
+    height: 48px;
+  }
+
+  .invalid-feedback {
+    font-size: 0.875rem;
+  }

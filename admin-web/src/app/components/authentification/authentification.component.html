@@ -1,0 +1,115 @@
+<div class="auth-wrapper">
+    <div class="auth-overlay"></div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="card shadow-lg auth-card">
+            <div class="card-body p-5">
+              <!-- Logo ou titre -->
+              <div class="text-center mb-4">
+                <h2 class="fw-bold text-primary">Connexion</h2>
+                <p class="text-muted">Accédez à votre compte</p>
+              </div>
+
+              <!-- Formulaire -->
+              <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <!-- Email -->
+                <div class="form-group mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="bi bi-envelope"></i>
+                    </span>
+                    <input
+                      type="email"
+                      id="email"
+                      formControlName="email"
+                      class="form-control"
+                      [class.is-invalid]="isFieldInvalid('email')"
+                      placeholder="Entrez votre email"
+                    >
+                  </div>
+                  @if (isFieldInvalid('email')) {
+                    <div class="invalid-feedback d-block">
+                      @if (loginForm.get('email')?.errors?.['required']) {
+                        L'email est requis
+                      }
+                      @if (loginForm.get('email')?.errors?.['email']) {
+                        Email invalide
+                      }
+                    </div>
+                  }
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="form-group mb-3">
+                  <label for="password" class="form-label">Mot de passe</label>
+                  <div class="input-group">
+                    <span class="input-group-text">
+                      <i class="bi bi-lock"></i>
+                    </span>
+                    <input
+                      [type]="showPassword ? 'text' : 'password'"
+                      id="password"
+                      formControlName="password"
+                      class="form-control"
+                      [class.is-invalid]="isFieldInvalid('password')"
+                      placeholder="Entrez votre mot de passe"
+                    >
+                    <button 
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      (click)="togglePasswordVisibility()">
+                      <i class="bi" [class]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                    </button>
+                  </div>
+                  @if (isFieldInvalid('password')) {
+                    <div class="invalid-feedback d-block">
+                      @if (loginForm.get('password')?.errors?.['required']) {
+                        Le mot de passe est requis
+                      }
+                      @if (loginForm.get('password')?.errors?.['minlength']) {
+                        Le mot de passe doit contenir au moins 6 caractères
+                      }
+                    </div>
+                  }
+                </div>
+
+                <!-- Options -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="remember"
+                      formControlName="remember"
+                    >
+                    <label class="form-check-label" for="remember">
+                      Se souvenir de moi
+                    </label>
+                  </div>
+                  <a href="#" class="text-primary text-decoration-none" (click)="forgotPassword($event)">
+                    Mot de passe oublié ?
+                  </a>
+                </div>
+
+                <!-- Bouton de connexion -->
+                <button
+                  type="submit"
+                  class="btn btn-primary w-100"
+                  [disabled]="!loginForm.valid || isLoading">
+                  @if (isLoading) {
+                    <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                    Connexion en cours...
+                  } @else {
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    Se connecter
+                  }
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

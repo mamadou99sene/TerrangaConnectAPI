@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DeclarationService } from '../../services/declaration.service';
 import { AppbarComponent } from '../appbar/appbar.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demandesang',
@@ -12,6 +13,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrl: './demandesang.component.css'
 })
 export class DemandesangComponent implements OnInit{
+
   isCollapsed: boolean = false;
   onSidebarToggle(collapsed: boolean) {
     this.isCollapsed = collapsed;
@@ -20,7 +22,7 @@ export class DemandesangComponent implements OnInit{
   ngOnInit(): void {
     this.loadAdminAllDemandeDonSang();
   }
-  constructor(private declarationService: DeclarationService)
+  constructor(private declarationService: DeclarationService, private router:Router)
   {
 
   }
@@ -63,4 +65,13 @@ export class DemandesangComponent implements OnInit{
         minute: 'numeric'
       });
     }
+
+    navigatedetailsDemande(demande: Demande_don_sang) {
+      this.router.navigate(["/detailsDemande"], 
+        {
+          //queryParams:{urgence:JSON.stringify(urgence)}
+          state:{demande}
+        });
+      }
+    
 }

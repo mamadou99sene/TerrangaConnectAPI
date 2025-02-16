@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
+
   @Input() isCollapsed: boolean = false;
   constructor(private router:Router)
   {
@@ -24,5 +25,7 @@ this.router.navigateByUrl("events");
     this.router.navigateByUrl("demandes");
  
   }
-
+  deconnexion() {
+   this.router.navigate(['/authentification'])
+    }
 }
