@@ -11,7 +11,6 @@ import ucad.sn.sociale_service.services.DeclarationService;
 import java.util.List;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/api")
 public class DeclarationController {
     private final DeclarationService declarationService;
