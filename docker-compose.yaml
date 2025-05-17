@@ -1,0 +1,54 @@
+services:
+  postgres-service:
+    image: postgres
+    container_name: postgres-tc
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Senemomo
+      POSTGRES_DB: terangaconnect
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    healthcheck:
+      test: "exit 0"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak-tc
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres-service:5432/terangaconnect
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: Senemomo
+      KEYCLOAK_ADMIN: admin
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    command:
+      - start-dev
+    restart: on-failure
+    ports:
+      - '8080:8080'
+    expose:
+      - '8080'
+    depends_on:
+      postgres-service:
+        condition: service_healthy
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=momo
+      - MONGO_INITDB_ROOT_PASSWORD=Senemomo
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/db
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+volumes:
+  postgres_data:
