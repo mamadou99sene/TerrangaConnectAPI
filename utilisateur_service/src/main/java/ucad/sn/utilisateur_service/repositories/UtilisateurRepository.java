@@ -12,5 +12,5 @@ import java.util.Optional;
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, String> {
     @Nullable
     Utilisateur findByEmail(String email);
-    Optional<Utilisateur> findByKeycloakId(String keycloakId);
+    Optional<Utilisateur> findByKeycloak_id(String keycloak_id);
 }

@@ -6,6 +6,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -17,22 +18,23 @@ import java.util.Arrays;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    private JwtAuthConverter jwtAuthConverter;
+    private JwtAuthConverter jwtConverter;
 
     public SecurityConfig(JwtAuthConverter jwtAuthConverter) {
-        this.jwtAuthConverter = jwtAuthConverter;
+        this.jwtConverter = jwtAuthConverter;
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+    public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
+        return  httpSecurity
+                .csrf(csrf->csrf.disable())
                 .cors(Customizer.withDefaults())
-                //.authorizeHttpRequests(ar->ar.requestMatchers("/products/**").permitAll())
-                .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
-                .oauth2ResourceServer(o2->o2.jwt(jwt->jwt.jwtAuthenticationConverter(jwtAuthConverter)))
-                .headers(h->h.frameOptions(fo->fo.disable()))
-                .csrf(csrf->csrf.ignoringRequestMatchers("/h2-console/**"))
+                .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth->auth.requestMatchers("/h2-console/**").permitAll())
+                .authorizeHttpRequests(auth->auth.anyRequest().authenticated())
+                .oauth2ResourceServer(oauth2->oauth2.jwt(jwt ->jwt.jwtAuthenticationConverter(jwtConverter)))
                 .build();
+
     }
 
     /*@Bean

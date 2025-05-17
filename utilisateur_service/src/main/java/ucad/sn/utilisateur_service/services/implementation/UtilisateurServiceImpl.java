@@ -178,4 +178,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         Resource profil=this.profilService.loadImage(utilisateur.getProfile());
         return profil;
     }
+
+    @Override
+    public Utilisateur getUtilisateurByKeycloak_id(String keycloak_id) {
+        return this.utilisateurRepository.
+                findByKeycloak_id(keycloak_id).
+                orElseThrow(()->new RuntimeException("L'utilisateur n'existe pas"));
+    }
 }

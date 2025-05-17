@@ -17,4 +17,5 @@ public interface UtilisateurService {
     public List<Utilisateur> createListOfUser(List<UtilisateurRequest> utilisateurRequestList);
     public Utilisateur uploadProfil(String idUtiliateur, MultipartFile profil);
     public Resource getProfileUtilisateur(String idUtilisateur);
+    public Utilisateur getUtilisateurByKeycloak_id(String keycloak_id);
 }
