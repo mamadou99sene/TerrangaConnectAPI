@@ -25,9 +25,6 @@ public class Utilisateur {
     @Enumerated(EnumType.STRING)
      List<Role> roles=new ArrayList<>();
     String keycloak_id;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Transient
-     String password;
     @Transient
      static Utilisateur utilisateur;
      String profile;
@@ -62,14 +59,6 @@ public class Utilisateur {
 
     public void setScore(double score) {
         this.score = score;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<Role> getRoles() {

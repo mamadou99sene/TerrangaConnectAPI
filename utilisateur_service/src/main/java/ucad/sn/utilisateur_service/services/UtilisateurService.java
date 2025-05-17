@@ -6,6 +6,7 @@ import ucad.sn.utilisateur_service.dto.UtilisateurRequest;
 import ucad.sn.utilisateur_service.entities.Utilisateur;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UtilisateurService {
     public List<Utilisateur> getAllUtilisateurs();
