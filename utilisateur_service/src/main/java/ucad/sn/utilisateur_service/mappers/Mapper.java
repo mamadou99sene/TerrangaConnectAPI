@@ -10,7 +10,6 @@ public class Mapper {
        utilisateur.setEmail(request.getEmail());
        utilisateur.setTelephone(request.getTelephone());
        utilisateur.setScore(request.getScore());
-       utilisateur.setPassword(request.getPassword());
        utilisateur.setRoles(request.getRoles());
        return utilisateur;
    }

@@ -30,8 +30,15 @@ public class SecurityConfig {
                 .csrf(csrf->csrf.disable())
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth->auth.requestMatchers("/h2-console/**").permitAll())
-                .authorizeHttpRequests(auth->auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth->auth.requestMatchers(
+                                "/swagger-ui.html",
+                                "swagger-ui/**",
+                                "/v3/**",
+                                "/h2-console/**",
+                                "/images/**",
+                                "/actuator/**")
+                        .permitAll()
+                        .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2->oauth2.jwt(jwt ->jwt.jwtAuthenticationConverter(jwtConverter)))
                 .build();
 

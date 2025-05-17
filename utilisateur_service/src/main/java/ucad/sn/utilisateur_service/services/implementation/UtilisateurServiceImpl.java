@@ -1,7 +1,6 @@
 package ucad.sn.utilisateur_service.services.implementation;
 import jakarta.ws.rs.core.Response;
 import org.keycloak.admin.client.Keycloak;
-import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
@@ -9,7 +8,6 @@ import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.core.io.Resource;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ucad.sn.utilisateur_service.dto.UtilisateurRequest;
@@ -28,13 +26,11 @@ import java.util.stream.Collectors;
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
     private UtilisateurRepository utilisateurRepository;
-    private final PasswordEncoder passwordEncoder;
     private final Mapper mapper;
     private ProfilService profilService;
 
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, PasswordEncoder passwordEncoder, Mapper mapper, ProfilService profilService) {
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, Mapper mapper, ProfilService profilService) {
         this.utilisateurRepository = utilisateurRepository;
-        this.passwordEncoder = passwordEncoder;
         this.mapper = mapper;
         this.profilService = profilService;
     }
@@ -77,7 +73,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Utilisateur createUtilisateur(UtilisateurRequest utilisateurRequest) {
         Utilisateur utilisateur = mapper.mapToEntitie(utilisateurRequest);
         String keycloakId = createUserInKeycloak(utilisateurRequest);
-        utilisateur.setKeycloak_id(keycloakId);
+        utilisateur.setKeycloakId(keycloakId);
 
         return utilisateurRepository.save(utilisateur);
     }
@@ -144,7 +140,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         List<Utilisateur> utilisateurList=new ArrayList<Utilisateur>();
         for (UtilisateurRequest request:utilisateurRequestList
              ) {
-            request.setPassword(passwordEncoder.encode(request.getPassword()));
+           // request.setPassword(passwordEncoder.encode(request.getPassword()));
             utilisateurList.add(mapper.mapToEntitie(request));
 
         }
@@ -182,7 +178,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public Utilisateur getUtilisateurByKeycloak_id(String keycloak_id) {
         return this.utilisateurRepository.
-                findByKeycloak_id(keycloak_id).
+                findByKeycloakId(keycloak_id).
                 orElseThrow(()->new RuntimeException("L'utilisateur n'existe pas"));
     }
 }

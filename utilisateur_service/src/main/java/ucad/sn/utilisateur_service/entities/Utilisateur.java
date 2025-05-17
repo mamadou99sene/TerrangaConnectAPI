@@ -24,7 +24,7 @@ public class Utilisateur {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
      List<Role> roles=new ArrayList<>();
-    String keycloak_id;
+    String keycloakId;
     @Transient
      static Utilisateur utilisateur;
      String profile;
@@ -85,11 +85,11 @@ public class Utilisateur {
         this.profile = profileImagePath;
     }
 
-    public String getKeycloak_id() {
-        return keycloak_id;
+    public String getKeycloakId() {
+        return keycloakId;
     }
 
-    public void setKeycloak_id(String keycloak_id) {
-        this.keycloak_id = keycloak_id;
+    public void setKeycloakId(String keycloakId) {
+        this.keycloakId = keycloakId;
     }
 }
