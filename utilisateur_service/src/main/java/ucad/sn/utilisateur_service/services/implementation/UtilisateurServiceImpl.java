@@ -1,4 +1,13 @@
 package ucad.sn.utilisateur_service.services.implementation;
+import jakarta.ws.rs.core.Response;
+import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
+import org.keycloak.admin.client.resource.UserResource;
+import org.keycloak.admin.client.resource.UsersResource;
+import org.keycloak.representations.idm.CredentialRepresentation;
+import org.keycloak.representations.idm.RoleRepresentation;
+import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,8 +20,10 @@ import ucad.sn.utilisateur_service.services.ProfilService;
 import ucad.sn.utilisateur_service.services.UtilisateurService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UtilisateurServiceImpl implements UtilisateurService {
@@ -64,10 +75,70 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur createUtilisateur(UtilisateurRequest utilisateurRequest) {
-        utilisateurRequest.setPassword(passwordEncoder.encode(utilisateurRequest.getPassword()));
-       return this.utilisateurRepository.save(mapper.mapToEntitie(utilisateurRequest));
+        Utilisateur utilisateur = mapper.mapToEntitie(utilisateurRequest);
+        String keycloakId = createUserInKeycloak(utilisateurRequest);
+        utilisateur.setKeycloak_id(keycloakId);
+
+        return utilisateurRepository.save(utilisateur);
     }
 
+    private String createUserInKeycloak(UtilisateurRequest request) {
+        // Création d'une instance Keycloak avec les identifiants admin
+        Keycloak keycloak = Keycloak.getInstance(
+                "http://localhost:8080",
+                "master",
+                "admin",
+                "admin",
+                "admin-cli");
+        // Accès aux ressources du realm
+        RealmResource realmResource = keycloak.realm("teranga_realm");
+        UsersResource usersResource = realmResource.users();
+
+        // Création de la représentation de l'utilisateur
+        UserRepresentation user = new UserRepresentation();
+        user.setEnabled(true);
+        user.setUsername(request.getEmail());
+        user.setEmail(request.getEmail());
+
+        user.setEmailVerified(true);
+        Response response = usersResource.create(user);
+
+        if (response.getStatus() != 201) {
+            throw new RuntimeException("Échec lors de la création de l'utilisateur dans Keycloak. Code: " + response.getStatus());
+        }
+
+        // Extraction de l'ID utilisateur depuis la réponse
+        String locationHeader = response.getHeaderString("Location");
+        if (locationHeader == null) {
+            throw new RuntimeException("Location header not found in Keycloak response");
+        }
+        String[] parts = locationHeader.split("/");
+        String userId = parts[parts.length - 1];
+
+        // Configuration du mot de passe non temporaire
+        UserResource userResource = usersResource.get(userId);
+        CredentialRepresentation credential = new CredentialRepresentation();
+        credential.setType(CredentialRepresentation.PASSWORD);
+        credential.setValue(request.getPassword());
+        credential.setTemporary(false);
+        userResource.resetPassword(credential);
+
+        // Attribution des rôles à l'utilisateur
+        if (request.getRoles() != null && !request.getRoles().isEmpty()) {
+            // Conversion des rôles enum en string
+            List<String> roleNames = request.getRoles().stream()
+                    .map(Enum::name)
+                    .collect(Collectors.toList());
+
+            // Attribution des rôles un par un
+            for (String roleName : roleNames) {
+                RoleRepresentation role = realmResource.roles().get(roleName).toRepresentation();
+                userResource.roles().realmLevel().add(Collections.singletonList(role));
+            }
+        }
+
+        return userId;
+    }
     @Override
     public List<Utilisateur> createListOfUser(List<UtilisateurRequest> utilisateurRequestList) {
         List<Utilisateur> utilisateurList=new ArrayList<Utilisateur>();
