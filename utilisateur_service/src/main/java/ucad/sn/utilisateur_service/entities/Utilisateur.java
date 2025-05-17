@@ -24,7 +24,9 @@ public class Utilisateur {
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(EnumType.STRING)
      List<Role> roles=new ArrayList<>();
+    String keycloak_id;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Transient
      String password;
     @Transient
      static Utilisateur utilisateur;
@@ -94,13 +96,11 @@ public class Utilisateur {
         this.profile = profileImagePath;
     }
 
-    public static Utilisateur getInstanceUtilisateur()
-    {
-        if (utilisateur==null)
-        {
-            utilisateur=new Utilisateur();
-            return utilisateur;
-        }
-        return utilisateur;
+    public String getKeycloak_id() {
+        return keycloak_id;
+    }
+
+    public void setKeycloak_id(String keycloak_id) {
+        this.keycloak_id = keycloak_id;
     }
 }
