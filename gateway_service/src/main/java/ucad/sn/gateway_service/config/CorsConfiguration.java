@@ -1,5 +1,6 @@
 package ucad.sn.gateway_service.config;
 
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
@@ -33,26 +34,24 @@ public class CorsConfiguration {
 
         return new CorsWebFilter(source);
     }
-
     @Bean
-    public WebFilter mobileAppFilter() {
-        return (ServerWebExchange ctx, WebFilterChain chain) -> {
-            ServerHttpRequest request = ctx.getRequest();
-            String userAgent = request.getHeaders().getFirst("User-Agent");
-            if (userAgent != null && userAgent.contains("Dart")) {
-                ServerHttpResponse response = ctx.getResponse();
-                HttpHeaders headers = response.getHeaders();
-                headers.add("Access-Control-Allow-Origin", "*");
-                headers.add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-                headers.add("Access-Control-Allow-Headers", "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization");
+    public GlobalFilter tokenRelayFilter() {
+        return (exchange, chain) -> {
+            // Récupérer les en-têtes de la requête entrante
+            HttpHeaders headers = exchange.getRequest().getHeaders();
 
-                if (request.getMethod() == HttpMethod.OPTIONS) {
-                    response.setStatusCode(HttpStatus.OK);
-                    return Mono.empty();
-                }
+            // Vérifier si l'en-tête d'autorisation existe
+            if (headers.containsKey("Authorization")) {
+                // Copier l'en-tête d'autorisation dans la requête sortante
+                return chain.filter(exchange.mutate()
+                        .request(r -> r.headers(requestHeaders -> {
+                            String authorizationHeader = headers.getFirst("Authorization");
+                            requestHeaders.set("Authorization", authorizationHeader);
+                        }))
+                        .build());
             }
 
-            return chain.filter(ctx);
+            return chain.filter(exchange);
         };
     }
 }
