@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import Keycloak from 'keycloak-js';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-
+    private readonly keycloak = inject(Keycloak);
   @Input() isCollapsed: boolean = false;
   constructor(private router:Router)
   {
@@ -26,6 +27,6 @@ this.router.navigateByUrl("events");
  
   }
   deconnexion() {
-   this.router.navigate(['/authentification'])
-    }
+  this.keycloak.logout();
+ }
 }

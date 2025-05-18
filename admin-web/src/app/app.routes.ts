@@ -5,18 +5,23 @@ import { EvenementComponent } from './components/evenement/evenement.component';
 import { DemandesangComponent } from './components/demandesang/demandesang.component';
 import { DetailurgenceComponent } from './components/detailurgence/detailurgence.component';
 import { DetaileventComponent } from './components/detailevent/detailevent.component';
-import { AuthentificationComponent } from './components/authentification/authentification.component';
 import { DetaildemandeComponent } from './components/detaildemande/detaildemande.component';
+import { keycloakAppGuard } from './guards/keyclok-guards.guard';
 
 export const routes: Routes = [
-  {path:'', component:AuthentificationComponent},
-  {path:'dashboard', component:DashboardComponent},
+  {path:'dashboard', component:DashboardComponent, canActivate: [keycloakAppGuard], data: {role : 'ADMIN'}, children:[
+      //l'ideal serait de faire un main-container et que les routes soit des comosant fils de ce comopsant main
+
+  ]},
+  
+  {path:'', component:DashboardComponent},
   {path:'urgences', component:UrgenceComponent,},
   {path:'events', component:EvenementComponent},
   {path:'demandes', component:DemandesangComponent},
   {path:'detailsUrgence', component: DetailurgenceComponent},
   {path:'detailsEvent', component:DetaileventComponent},
   {path:'detailsDemande', component:DetaildemandeComponent},
-  {path:'authentification', component:AuthentificationComponent},
-  {path:'', redirectTo:'/',pathMatch:'full'}
+  {path:'', redirectTo:'/',pathMatch:'full'},
 ];
+
+
