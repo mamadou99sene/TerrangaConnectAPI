@@ -1,0 +1,40 @@
+.forbidden-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.forbidden-content {
+  text-align: center;
+  padding: 40px;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.forbidden-content h1 {
+  font-size: 3rem;
+  color: #dc3545;
+  margin-bottom: 20px;
+}
+
+.forbidden-content p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.back-home {
+  text-decoration: none;
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.back-home:hover {
+  background-color: #0056b3;
+}
