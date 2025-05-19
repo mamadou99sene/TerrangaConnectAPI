@@ -1,68 +1,73 @@
-<app-appbar (sidebarToggled)="onSidebarToggle($event)"></app-appbar>
-  <!-- Main Container -->
-  <div class="container-fluid main-container">
-      <div class="row">
-          <!-- Sidebar -->
-          <app-sidebar [isCollapsed]="isCollapsed"></app-sidebar>
-          <!-- Main Content -->
-          <div class="main-content" id="main-content" [class.expanded]="isCollapsed">
-              <!-- Table -->
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Declarations d'urgences</h5>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Demandeur</th>
-                          <th>Titre</th>
-                          <th>Lieu</th>
-                          <th>Type</th>
-                          <th>Montant requis</th>
-                          <th>Validation</th>
-                          <th>Details</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @for (urgence of listUrgences(); track urgence.id) {
-                          <tr>
-                            <td>{{urgence.demandeur.email}}</td>
-                            <td>{{urgence.titre}}</td>
-                            <td class="location-cell">
-                              <i class="bi bi-geo-alt-fill"></i>
-                              {{urgence.lieu}}
-                            </td>
-                            <td>{{urgence.type}}</td>
-                            <td>
-                              <span class="amount-cell">
-                                {{urgence.montantRequis}} FCFA
-                              </span>
-                            </td>
-                            <td>
-                              <button 
-                                class="btn btn-action btn-validate"
-                                [class.validated]="urgence.status === 'VALIDATED'"
-                                [class.pending]="urgence.status === 'PENDING'"
-                                (click)="valider(urgence)">
-                                <i class="bi" 
-                                   [class.bi-check-lg]="urgence.status === 'VALIDATED'"
-                                   [class.bi-x-lg]="urgence.status === 'PENDING'">
-                                </i>
-                              </button>
-                            </td>
-                            <td>
-                              <button class="btn btn-action btn-details" 
-                                      (click)="navigatedetailsUrgence(urgence)">
-                                <i class="bi bi-arrow-right"></i>
-                              </button>
-                            </td>
-                          </tr>
-                        }
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-          </div>
+<div class="container-fluid main-container">
+  <div class="main-content expanded"> <!-- forcé en mode plein écran -->
+    
+    <!-- Card for Table -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Déclarations d'urgences</h5>
+
+        <!-- Table Responsive -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Demandeur</th>
+                <th>Titre</th>
+                <th>Lieu</th>
+                <th>Type</th>
+                <th>Montant requis</th>
+                <th>Validation</th>
+                <th>Détails</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (urgence of listUrgences(); track urgence.id) {
+                <tr>
+                  <td>{{ urgence.demandeur.email }}</td>
+                  <td>{{ urgence.titre }}</td>
+                  
+                  <!-- Lieu -->
+                  <td class="location-cell">
+                    <i class="bi bi-geo-alt-fill location-icon"></i>
+                    {{ urgence.lieu }}
+                  </td>
+
+                  <td>{{ urgence.type }}</td>
+
+                  <!-- Montant requis -->
+                  <td>
+                    <span class="amount-cell">{{ urgence.montantRequis }} FCFA</span>
+                  </td>
+
+                  <!-- Validation button -->
+                  <td>
+                    <button 
+                      class="btn btn-action btn-validate"
+                      [class.validated]="urgence.status === 'VALIDATED'"
+                      [class.pending]="urgence.status === 'PENDING'"
+                      (click)="valider(urgence)">
+                      <i class="bi" 
+                         [class.bi-check-lg]="urgence.status === 'VALIDATED'"
+                         [class.bi-x-lg]="urgence.status === 'PENDING'">
+                      </i>
+                    </button>
+                  </td>
+
+                  <!-- Détail button -->
+                  <td>
+                    <button 
+                      class="btn btn-action btn-details"
+                      (click)="navigatedetailsUrgence(urgence)">
+                      <i class="bi bi-arrow-right"></i>
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
+    </div>
+
   </div>
+</div>

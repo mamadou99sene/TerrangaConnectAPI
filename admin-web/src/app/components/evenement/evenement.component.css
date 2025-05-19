@@ -1,20 +1,3 @@
-
-/* Card & Table Styles */
-.card {
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
-}
-
-.card-title {
-  color: #2c3e50;
-  font-weight: 600;
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Table Styles */
 .table {
   margin-bottom: 0;
   vertical-align: middle;
@@ -35,40 +18,45 @@
   padding: 1rem;
   vertical-align: middle;
   border-bottom: 1px solid #e9ecef;
+  font-size: 0.9rem;
 }
 
-/* Button Styles */
-.btn-action {
-  padding: 0.5rem;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  width: 40px;
-  height: 40px;
-  display: inline-flex;
+/* Location Cell Style */
+.location-cell {
+  display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 0 0.25rem;
+  gap: 0.5rem;
 }
 
-.btn-validate {
-  border: 2px solid #198754;
-  background-color: transparent;
-}
-
-.btn-validate:hover {
-  background-color: #198754;
-  color: white;
+.bi-geo-alt-fill {
+  color: #ffc107;
+  font-size: 1.1rem;
 }
 
 .btn-validate.validated {
+  border-color: #198754;
+  color: #198754;
+}
+
+.btn-validate.validated:hover {
   background-color: #198754;
   color: white;
 }
 
+.btn-validate.pending {
+  border-color: #dc3545;
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-validate.pending:hover {
+  background-color: #bb2d3b;
+}
+
 .btn-details {
-  border: 2px solid #0d6efd;
-  background-color: transparent;
+  border-color: #0d6efd;
   color: #0d6efd;
+  background-color: transparent;
 }
 
 .btn-details:hover {
@@ -77,34 +65,18 @@
 }
 
 /* Icon Styles */
-.bi {
+.btn-action i {
   font-size: 1.2rem;
   line-height: 1;
+  transition: transform 0.2s ease;
 }
 
-/* Status Styles */
-.date-cell {
-  font-size: 0.875rem;
-  padding: 0.5rem;
-  border-radius: 6px;
-}
-
-.date-start {
-  background-color: #e9ecef;
-  color: #2c3e50;
-}
-
-.date-end {
-  background-color: #dc3545;
-  color: white;
+.btn-action:hover i {
+  transform: scale(1.1);
 }
 
 /* Responsive Adjustments */
 @media (max-width: 991.98px) {
-  .main-content {
-    margin-left: 0;
-  }
-  
   .table-responsive {
     overflow-x: auto;
   }
@@ -112,34 +84,14 @@
   .table td, .table th {
     min-width: 120px;
   }
+  
 }
 
-/* Location Icon Style */
-.location-cell {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+/* Hover Effects */
+.table tbody tr {
+  transition: background-color 0.2s ease;
 }
 
-.location-icon {
-  color: #ffc107;
-}
-
-/* Layout Adjustments */
-.main-container {
-  margin-top: 60px;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.main-content {
-  margin-left: 250px;
-  transition: margin-left 0.3s ease;
-  padding: 20px;
-  width: calc(100% - 250px);
-}
-
-.main-content.expanded {
-  margin-left: 0;
-  width: 100%;
+.table tbody tr:hover {
+  background-color: #f8f9fa;
 }

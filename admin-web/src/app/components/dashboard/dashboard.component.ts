@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DeclarationService } from '../../services/declaration.service';
 import { CommonModule } from '@angular/common';
-import { AppbarComponent } from "../appbar/appbar.component";
-import { SidebarComponent } from "../sidebar/sidebar.component";
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
@@ -23,16 +21,12 @@ interface InterventionStats {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, AppbarComponent],
+  imports: [CommonModule ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent implements OnInit {
-  isCollapsed: boolean = false;
-  onSidebarToggle(collapsed: boolean) {
-    this.isCollapsed = collapsed;
-  }
-  declarationStats: DeclarationStats = {
+   declarationStats: DeclarationStats = {
     urgencesSociales: 0,
     demandesSang: 0,
     evenements: 0,
@@ -54,35 +48,38 @@ export class DashboardComponent implements OnInit {
     this.loadDeclarationData();
     setTimeout(() => {
       this.createDeclarationTypeChart();
-    this.createInterventionTrendChart();
-    this.createValidationStatusChart();
+      this.createInterventionTrendChart();
+      this.createValidationStatusChart();
     }, 500);
   }
 
   loadDeclarationData(): void {
     this.declarationService.getAdminAllUrgencesSociale().subscribe({
-      next:urgences=>{
+      next: urgences => {
         this.declarationStats.urgencesSociales = urgences.length;
         this.updateTotalDeclarations();
-      },error(err) {
+      },
+      error(err) {
         console.log(err);
       },
     });
 
     this.declarationService.getAdminAllDemandeDonSang().subscribe({
-      next:demandes=>{
+      next: demandes => {
         this.declarationStats.demandesSang = demandes.length;
         this.updateTotalDeclarations();
-      }, error(err) {
+      }, 
+      error(err) {
         console.log(err);
       },
     });
 
     this.declarationService.getAdminAllEvenement().subscribe({
-      next:events=>{
+      next: events => {
         this.declarationStats.evenements = events.length;
         this.updateTotalDeclarations();
-      }, error(err) {
+      }, 
+      error(err) {
         console.log(err);
       },
     });
@@ -93,7 +90,6 @@ export class DashboardComponent implements OnInit {
       this.declarationStats.urgencesSociales + 
       this.declarationStats.demandesSang + 
       this.declarationStats.evenements;
-      console.log(this.declarationStats.urgencesSociales)
   }
 
   createDeclarationTypeChart(): void {
@@ -118,7 +114,7 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
-        maintainAspectRatio:false,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -162,7 +158,7 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
-        maintainAspectRatio:false,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -204,7 +200,7 @@ export class DashboardComponent implements OnInit {
       },
       options: {
         responsive: true,
-        maintainAspectRatio:false,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,

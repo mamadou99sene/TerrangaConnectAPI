@@ -1,80 +1,73 @@
-<app-appbar (sidebarToggled)="onSidebarToggle($event)"></app-appbar>
-
-  <!-- Main Container -->
-  <div class="container-fluid main-container">
-      <div class="row">
-          <!-- Sidebar -->
-          <app-sidebar [isCollapsed]="isCollapsed"></app-sidebar>
-          <!-- Main Content -->
-          <div class="main-content" id="main-content" [class.expanded]="isCollapsed">
-              <!-- Table -->
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Demande Don Sang</h5>
-                  <div class="table-responsive">
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>Demandeur</th>
-                          <th>Titre</th>
-                          <th>Adresse</th>
-                          <th>Classe</th>
-                          <th>Rhésus</th>
-                          <th>Validation</th>
-                          <th>Details</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @for (demande of listDemandeSang(); track demande.id) {
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <i class="bi bi-person-circle me-2 text-primary"></i>
-                                {{demande.demandeur.email}}
-                              </div>
-                            </td>
-                            <td>{{demande.titre}}</td>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <i class="bi bi-geo-alt-fill me-2 text-warning"></i>
-                                {{demande.adresse}}
-                              </div>
-                            </td>
-                            <td>
-                              <span class="badge bg-primary">{{demande.classe}}</span>
-                            </td>
-                            <td>
-                              <span class="badge bg-info">{{demande.rhesus}}</span>
-                            </td>
-                            <td>
-                              <button 
-                                class="btn" 
-                                [ngClass]="{
-                                  'btn-outline-success': demande.status === 'VALIDATED',
-                                  'btn-danger': demande.status === 'PENDING'
-                                }" 
-                                (click)="validerDemande(demande)">
-                                @if (demande.status === 'VALIDATED') {
-                                  <i class="bi bi-check-lg text-success"></i>
-                                } @else {
-                                  <i class="bi bi-x-lg text-white"></i>
-                                }
-                              </button>
-                            </td>
-                            <td>
-                              <button class="btn btn-action btn-details" 
-                                      (click)="navigatedetailsDemande(demande)">
-                                <i class="bi bi-arrow-right"></i>
-                              </button>
-                            </td>
-                          </tr>
+<div class="container-fluid main-container">
+  <div class="row">
+    <div class="main-content w-100" id="main-content">
+      <!-- Table -->
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Demande Don Sang</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Demandeur</th>
+                  <th>Titre</th>
+                  <th>Adresse</th>
+                  <th>Classe</th>
+                  <th>Rhésus</th>
+                  <th>Validation</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (demande of listDemandeSang(); track demande.id) {
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-person-circle me-2 text-primary"></i>
+                        {{demande.demandeur.email}}
+                      </div>
+                    </td>
+                    <td>{{demande.titre}}</td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-geo-alt-fill me-2 text-warning"></i>
+                        {{demande.adresse}}
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge bg-primary">{{demande.classe}}</span>
+                    </td>
+                    <td>
+                      <span class="badge bg-info">{{demande.rhesus}}</span>
+                    </td>
+                    <td>
+                      <button 
+                        class="btn" 
+                        [ngClass]="{
+                          'btn-outline-success': demande.status === 'VALIDATED',
+                          'btn-danger': demande.status === 'PENDING'
+                        }" 
+                        (click)="validerDemande(demande)">
+                        @if (demande.status === 'VALIDATED') {
+                          <i class="bi bi-check-lg text-success"></i>
+                        } @else {
+                          <i class="bi bi-x-lg text-white"></i>
                         }
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              
+                      </button>
+                    </td>
+                    <td>
+                      <button class="btn btn-action btn-details" 
+                              (click)="navigatedetailsDemande(demande)">
+                        <i class="bi bi-arrow-right"></i>
+                      </button>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
           </div>
+        </div>
       </div>
+    </div>
   </div>
+</div>

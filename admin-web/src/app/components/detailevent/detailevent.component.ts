@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Evenement } from '../../../models/Evenement';
-import { AppbarComponent } from "../appbar/appbar.component";
-import { SidebarComponent } from "../sidebar/sidebar.component";
 
 @Component({
   selector: 'app-detailevent',
-  imports: [AppbarComponent, SidebarComponent],
+  imports: [],
   templateUrl: './detailevent.component.html',
   styleUrl: './detailevent.component.css'
 })

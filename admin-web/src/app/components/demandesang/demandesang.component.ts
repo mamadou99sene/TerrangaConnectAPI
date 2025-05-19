@@ -2,22 +2,15 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Demande_don_sang } from '../../../models/Demande_don_sang';
 import { CommonModule } from '@angular/common';
 import { DeclarationService } from '../../services/declaration.service';
-import { AppbarComponent } from '../appbar/appbar.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demandesang',
-  imports: [CommonModule, AppbarComponent, SidebarComponent],
+  imports: [CommonModule],
   templateUrl: './demandesang.component.html',
   styleUrl: './demandesang.component.css'
 })
 export class DemandesangComponent implements OnInit{
-
-  isCollapsed: boolean = false;
-  onSidebarToggle(collapsed: boolean) {
-    this.isCollapsed = collapsed;
-  }
   listDemandeSang=signal<Array<Demande_don_sang>>([]);
   ngOnInit(): void {
     this.loadAdminAllDemandeDonSang();
@@ -67,7 +60,7 @@ export class DemandesangComponent implements OnInit{
     }
 
     navigatedetailsDemande(demande: Demande_don_sang) {
-      this.router.navigate(["/detailsDemande"], 
+      this.router.navigate(["main/detailsDemande"], 
         {
           //queryParams:{urgence:JSON.stringify(urgence)}
           state:{demande}

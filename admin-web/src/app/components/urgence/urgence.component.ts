@@ -2,22 +2,16 @@ import { Component, OnInit, signal } from '@angular/core';
 import { UrgenceSociale } from '../../../models/UrgenceSociale';
 import { DeclarationService } from '../../services/declaration.service';
 import { CommonModule } from '@angular/common';
-import { AppbarComponent } from "../appbar/appbar.component";
-import { SidebarComponent } from "../sidebar/sidebar.component";
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-urgence',
-  imports: [CommonModule, AppbarComponent, SidebarComponent],
+  imports: [CommonModule],
   templateUrl: './urgence.component.html',
   styleUrl: './urgence.component.css'
 })
 export class UrgenceComponent implements OnInit{
   
-  isCollapsed: boolean = false;
-  onSidebarToggle(collapsed: boolean) {
-    this.isCollapsed = collapsed;
-  }
   ngOnInit(): void {
     this.loadAdminAllUrgencesSociale();
   }
@@ -54,7 +48,7 @@ export class UrgenceComponent implements OnInit{
     });
     }
     navigatedetailsUrgence(urgence: UrgenceSociale) {
-     this.router.navigate(["/detailsUrgence"], 
+     this.router.navigate(["main/detailsUrgence"], 
       {
         //queryParams:{urgence:JSON.stringify(urgence)}
         state:{urgence}

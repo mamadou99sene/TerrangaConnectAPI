@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Demande_don_sang } from '../../../models/Demande_don_sang';
 import { Router } from '@angular/router';
-import { AppbarComponent } from '../appbar/appbar.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+
 
 @Component({
   selector: 'app-detaildemande',
-  imports: [AppbarComponent, SidebarComponent],
+  imports: [ ],
   templateUrl: './detaildemande.component.html',
   styleUrl: './detaildemande.component.css'
 })

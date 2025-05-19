@@ -2,22 +2,15 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Evenement } from '../../../models/Evenement';
 import { CommonModule } from '@angular/common';
 import { DeclarationService } from '../../services/declaration.service';
-import { AppbarComponent } from '../appbar/appbar.component';
-import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-evenement',
-  imports: [CommonModule, AppbarComponent, SidebarComponent],
+  imports: [CommonModule],
   templateUrl: './evenement.component.html',
   styleUrl: './evenement.component.css'
 })
 export class EvenementComponent implements OnInit{
-  isCollapsed: boolean = false;
-  onSidebarToggle(collapsed: boolean) {
-    this.isCollapsed = collapsed;
-  }
-
   listEvenements=signal<Array<Evenement>>([]);
   ngOnInit(): void {
     this.loadAdminAllEvenement();
@@ -56,7 +49,7 @@ export class EvenementComponent implements OnInit{
    }
 }
 navigateEvent(evenement: Evenement) {
- this.router.navigate(["/detailsEvent"],
+ this.router.navigate(["main/detailsEvent"],
   {
     state: {evenement},
   })

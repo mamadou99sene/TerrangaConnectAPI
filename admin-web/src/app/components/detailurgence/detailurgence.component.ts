@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UrgenceSociale } from '../../../models/UrgenceSociale';
 import { CommonModule } from '@angular/common';
-import { AppbarComponent } from "../appbar/appbar.component";
-import { SidebarComponent } from "../sidebar/sidebar.component";
-
 @Component({
   selector: 'app-detailurgence',
-  imports: [CommonModule, AppbarComponent, SidebarComponent],
+  imports: [CommonModule ],
   templateUrl: './detailurgence.component.html',
   styleUrl: './detailurgence.component.css'
 })
