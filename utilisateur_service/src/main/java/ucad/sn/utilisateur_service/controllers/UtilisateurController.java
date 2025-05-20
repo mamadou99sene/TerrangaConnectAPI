@@ -31,7 +31,7 @@ public class UtilisateurController {
         return  ResponseEntity.status(HttpStatus.OK).body(utilisateurs);
     }
     @GetMapping("/utilisateurs/{id}")
-    ResponseEntity  <Utilisateur> getUtilisateurById(@PathVariable String id)
+    ResponseEntity <Utilisateur> getUtilisateurById(@PathVariable String id)
     {
         Utilisateur utilisateurById = utilisateurService.getUtilisateurById(id);
         if(utilisateurById!=null)
@@ -39,6 +39,12 @@ public class UtilisateurController {
             return ResponseEntity.status(HttpStatus.OK).body(utilisateurById);
         }
         throw new RuntimeException("Utilisateur non trouvé");
+    }
+    @GetMapping("/utilisateurs/keycloak/{keycloakId}")
+    ResponseEntity<Utilisateur> getUtilisateurByKeycloakId(@PathVariable String keycloakId)
+    {
+        Utilisateur useByKcId = this.utilisateurService.getUtilisateurByKeycloak_id(keycloakId);
+        return  ResponseEntity.status(HttpStatus.OK).body(useByKcId);
     }
 
     @PutMapping("/utilisateurs/{id}")
