@@ -15,7 +15,7 @@ public class AssistanceServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(AssistanceServiceApplication.class, args);
     }
-@Bean
+//@Bean
 CommandLineRunner commandLineRunner(@Value("classpath:documents/*") Resource[] pdfresources,  AssistanceService assistanceService, JdbcTemplate jdbcTemplate)
     {
         return args -> {
