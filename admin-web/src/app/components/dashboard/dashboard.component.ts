@@ -34,12 +34,11 @@ export class DashboardComponent implements OnInit {
   };
 
   interventionData: InterventionStats[] = [
-    { month: 'Jan', especeCount: 45, materielCount: 30, sangCount: 25 },
+    { month: 'Jan', especeCount: 15, materielCount: 5, sangCount: 20 },
     { month: 'Fév', especeCount: 52, materielCount: 35, sangCount: 28 },
     { month: 'Mar', especeCount: 48, materielCount: 40, sangCount: 32 },
     { month: 'Avr', especeCount: 55, materielCount: 38, sangCount: 35 },
-    { month: 'Mai', especeCount: 60, materielCount: 45, sangCount: 40 },
-    { month: 'Jun', especeCount: 63, materielCount: 50, sangCount: 45 }
+    { month: 'Mai', especeCount: 10, materielCount: 5, sangCount: 21 },
   ];
 
   constructor(private declarationService: DeclarationService) {}
